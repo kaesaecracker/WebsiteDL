@@ -6,6 +6,8 @@
 *.user
 *.userosscache
 *.sln.docstates
+*/Icons/unused/*
+*/desktop.ini
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -240,3 +242,15 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/Website Downloader/Icons/desktop.ini
+/System.Windows.Forms.Ribbon/Properties/desktop.ini
+/System.Windows.Forms.Ribbon/Component Classes/desktop.ini
+/System.Windows.Forms.Ribbon/Classes/Renderers/desktop.ini
+/System.Windows.Forms.Ribbon/Classes/Renderers/Color Tables/desktop.ini
+/System.Windows.Forms.Ribbon/Classes/Interfaces/desktop.ini
+/System.Windows.Forms.Ribbon/Classes/Glyphs/desktop.ini
+/System.Windows.Forms.Ribbon/Classes/EventArgs/desktop.ini
+/System.Windows.Forms.Ribbon/Classes/desktop.ini
+/System.Windows.Forms.Ribbon/Classes/Enums/desktop.ini
+/System.Windows.Forms.Ribbon/Classes/Designers/desktop.ini
+/System.Windows.Forms.Ribbon/Classes/Collections/desktop.ini
