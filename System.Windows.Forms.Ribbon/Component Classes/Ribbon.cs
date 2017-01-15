@@ -1886,7 +1886,7 @@ namespace System.Windows.Forms
                     g.DrawLine(p, OrbBounds.Left, OrbBounds.Bottom, Bounds.Right, OrbBounds.Bottom);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
             }
         }

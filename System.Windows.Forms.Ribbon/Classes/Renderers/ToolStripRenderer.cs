@@ -240,7 +240,7 @@ namespace System.Windows.Forms
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }
@@ -640,7 +640,7 @@ namespace System.Windows.Forms
                 {
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }
