@@ -14,8 +14,10 @@ namespace WebsiteDownloader
     {
         public StartupUi()
         {
+            // To test different languages:
+            ///System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("de-DE");
+
             InitializeComponent();
-            //this.Controls.Add( new System.Windows.Controls.Ribbon.Ribbon());
         }
     }
 }

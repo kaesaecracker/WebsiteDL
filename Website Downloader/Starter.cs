@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace WebsiteDownloader
 {
-    static class Program
+    static class Starter
     {
         /// <summary>
         /// The main entry point for the application.
@@ -17,6 +17,7 @@ namespace WebsiteDownloader
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new StartupUi());
+
         }
     }
 }
