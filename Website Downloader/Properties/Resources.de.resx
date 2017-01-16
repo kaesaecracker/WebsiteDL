@@ -121,7 +121,7 @@
     <value>Download</value>
   </data>
   <data name="ribbon_download_open" xml:space="preserve">
-    <value>Open downloaded files</value>
+    <value>Heruntergeladene Dateien öffnen</value>
   </data>
   <data name="ribbon_download_open_browser" xml:space="preserve">
     <value>Browser</value>
@@ -136,21 +136,18 @@
     <value>Start</value>
   </data>
   <data name="ribbon_download_status_stop" xml:space="preserve">
-    <value>Stop</value>
+    <value>Stopp</value>
   </data>
   <data name="ribbon_project" xml:space="preserve">
-    <value>Project</value>
+    <value>Projekt</value>
   </data>
   <data name="ribbon_project_file" xml:space="preserve">
-    <value>Project File</value>
+    <value>Projektdatei</value>
   </data>
   <data name="ribbon_project_file_create" xml:space="preserve">
-    <value>Create</value>
+    <value>Erstellen</value>
   </data>
   <data name="ribbon_project_file_load" xml:space="preserve">
-    <value>Open</value>
-  </data>
-  <data name="startupui_title" xml:space="preserve">
-    <value>StartupUi</value>
+    <value>Öffnen</value>
   </data>
 </root>

@@ -17,6 +17,7 @@ namespace WebsiteDownloader
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new StartupUi());
+
         }
     }
 }
