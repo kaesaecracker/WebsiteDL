@@ -30,12 +30,15 @@ namespace WebsiteDownloader
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartupUi));
             this.top_panel = new System.Windows.Forms.Panel();
             this.ribbon = new System.Windows.Forms.Ribbon();
-            this.ribbon_project = new System.Windows.Forms.RibbonTab();
+            this.ribbon_start = new System.Windows.Forms.RibbonTab();
             this.ribbon_project_file = new System.Windows.Forms.RibbonPanel();
             this.ribbon_project_file_load = new System.Windows.Forms.RibbonButton();
             this.ribbon_project_file_create = new System.Windows.Forms.RibbonButton();
+            this.ribbon_start_about = new System.Windows.Forms.RibbonPanel();
+            this.ribbon_start_about_btn = new System.Windows.Forms.RibbonButton();
             this.ribbon_download = new System.Windows.Forms.RibbonTab();
             this.ribbon_download_status = new System.Windows.Forms.RibbonPanel();
             this.ribbon_download_status_start = new System.Windows.Forms.RibbonButton();
@@ -49,7 +52,7 @@ namespace WebsiteDownloader
             // top_panel
             // 
             this.top_panel.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.top_panel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.top_panel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.top_panel.Controls.Add(this.ribbon);
             this.top_panel.Location = new System.Drawing.Point(0, -23);
@@ -83,16 +86,17 @@ namespace WebsiteDownloader
             this.ribbon.RibbonTabFont = new System.Drawing.Font("Trebuchet MS", 9F);
             this.ribbon.Size = new System.Drawing.Size(595, 178);
             this.ribbon.TabIndex = 4;
-            this.ribbon.Tabs.Add(this.ribbon_project);
+            this.ribbon.Tabs.Add(this.ribbon_start);
             this.ribbon.Tabs.Add(this.ribbon_download);
             this.ribbon.TabsMargin = new System.Windows.Forms.Padding(1, 24, 1, 1);
             this.ribbon.TabSpacing = 5;
             this.ribbon.ThemeColor = System.Windows.Forms.RibbonTheme.Black;
             // 
-            // ribbon_project
+            // ribbon_start
             // 
-            this.ribbon_project.Panels.Add(this.ribbon_project_file);
-            this.ribbon_project.Text = global::WebsiteDownloader.Properties.Resources.ribbon_project;
+            this.ribbon_start.Panels.Add(this.ribbon_project_file);
+            this.ribbon_start.Panels.Add(this.ribbon_start_about);
+            this.ribbon_start.Text = global::WebsiteDownloader.Properties.Resources.ribbon_start;
             // 
             // ribbon_project_file
             // 
@@ -104,13 +108,26 @@ namespace WebsiteDownloader
             // 
             this.ribbon_project_file_load.Image = global::WebsiteDownloader.Properties.Resources.icon_file_load;
             this.ribbon_project_file_load.MinSizeMode = System.Windows.Forms.RibbonElementSizeMode.Overflow;
+            this.ribbon_project_file_load.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbon_project_file_load.SmallImage")));
             this.ribbon_project_file_load.Text = global::WebsiteDownloader.Properties.Resources.ribbon_project_file_load;
             // 
             // ribbon_project_file_create
             // 
             this.ribbon_project_file_create.Image = global::WebsiteDownloader.Properties.Resources.icon_file_create;
             this.ribbon_project_file_create.MinSizeMode = System.Windows.Forms.RibbonElementSizeMode.Overflow;
+            this.ribbon_project_file_create.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbon_project_file_create.SmallImage")));
             this.ribbon_project_file_create.Text = global::WebsiteDownloader.Properties.Resources.ribbon_project_file_create;
+            // 
+            // ribbon_start_about
+            // 
+            this.ribbon_start_about.Items.Add(this.ribbon_start_about_btn);
+            this.ribbon_start_about.Text = "About";
+            // 
+            // ribbon_start_about_btn
+            // 
+            this.ribbon_start_about_btn.Image = global::WebsiteDownloader.Properties.Resources.icon_info;
+            this.ribbon_start_about_btn.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbon_start_about_btn.SmallImage")));
+            this.ribbon_start_about_btn.Click += new System.EventHandler(this.ribbon_start_about_btn_Click);
             // 
             // ribbon_download
             // 
@@ -128,6 +145,7 @@ namespace WebsiteDownloader
             // 
             this.ribbon_download_status_start.Image = global::WebsiteDownloader.Properties.Resources.icon_download_start;
             this.ribbon_download_status_start.MinSizeMode = System.Windows.Forms.RibbonElementSizeMode.Overflow;
+            this.ribbon_download_status_start.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbon_download_status_start.SmallImage")));
             this.ribbon_download_status_start.Text = global::WebsiteDownloader.Properties.Resources.ribbon_download_status_start;
             // 
             // ribbon_download_status_stop
@@ -135,6 +153,7 @@ namespace WebsiteDownloader
             this.ribbon_download_status_stop.Enabled = false;
             this.ribbon_download_status_stop.Image = global::WebsiteDownloader.Properties.Resources.icon_download_stop;
             this.ribbon_download_status_stop.MinSizeMode = System.Windows.Forms.RibbonElementSizeMode.Overflow;
+            this.ribbon_download_status_stop.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbon_download_status_stop.SmallImage")));
             this.ribbon_download_status_stop.Text = global::WebsiteDownloader.Properties.Resources.ribbon_download_status_stop;
             // 
             // ribbon_download_open
@@ -147,12 +166,14 @@ namespace WebsiteDownloader
             // 
             this.ribbon_download_open_browser.Image = global::WebsiteDownloader.Properties.Resources.icon_browser;
             this.ribbon_download_open_browser.MinSizeMode = System.Windows.Forms.RibbonElementSizeMode.Overflow;
+            this.ribbon_download_open_browser.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbon_download_open_browser.SmallImage")));
             this.ribbon_download_open_browser.Text = global::WebsiteDownloader.Properties.Resources.ribbon_download_open_browser;
             // 
             // ribbon_download_open_manager
             // 
             this.ribbon_download_open_manager.Image = global::WebsiteDownloader.Properties.Resources.icon_manager;
             this.ribbon_download_open_manager.MinSizeMode = System.Windows.Forms.RibbonElementSizeMode.Overflow;
+            this.ribbon_download_open_manager.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbon_download_open_manager.SmallImage")));
             this.ribbon_download_open_manager.Text = global::WebsiteDownloader.Properties.Resources.ribbon_download_open_manager;
             // 
             // StartupUi
@@ -161,16 +182,16 @@ namespace WebsiteDownloader
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(594, 400);
             this.Controls.Add(this.top_panel);
-            this.MinimumSize = new System.Drawing.Size(425, 0);
+            this.MinimumSize = new System.Drawing.Size(425, 39);
             this.Name = "StartupUi";
-            this.Text = Resources.startupui_title;
+            this.Text = "Website Downloader";
             this.top_panel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.RibbonTab ribbon_project;
+        private System.Windows.Forms.RibbonTab ribbon_start;
         private System.Windows.Forms.RibbonTab ribbon_download;
         private System.Windows.Forms.RibbonPanel ribbon_project_file;
         private System.Windows.Forms.RibbonButton ribbon_project_file_load;
@@ -183,6 +204,8 @@ namespace WebsiteDownloader
         private System.Windows.Forms.RibbonButton ribbon_download_open_manager;
         private System.Windows.Forms.Panel top_panel;
         private System.Windows.Forms.Ribbon ribbon;
+        private System.Windows.Forms.RibbonPanel ribbon_start_about;
+        private System.Windows.Forms.RibbonButton ribbon_start_about_btn;
     }
 }
 

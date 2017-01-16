@@ -113,6 +113,16 @@ namespace WebsiteDownloader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_info {
+            get {
+                object obj = ResourceManager.GetObject("icon_info", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_manager {
             get {
                 object obj = ResourceManager.GetObject("icon_manager", resourceCulture);
@@ -184,15 +194,6 @@ namespace WebsiteDownloader.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Project.
-        /// </summary>
-        internal static string ribbon_project {
-            get {
-                return ResourceManager.GetString("ribbon_project", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Project File.
         /// </summary>
         internal static string ribbon_project_file {
@@ -216,6 +217,15 @@ namespace WebsiteDownloader.Properties {
         internal static string ribbon_project_file_load {
             get {
                 return ResourceManager.GetString("ribbon_project_file_load", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        internal static string ribbon_start {
+            get {
+                return ResourceManager.GetString("ribbon_start", resourceCulture);
             }
         }
         

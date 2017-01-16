@@ -199,6 +199,22 @@
         8sZHVF6cAQAAAAAAAAAAAABAYzT6BnuMKmBeOUlSAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="icon_info" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAEwAAABMCAYAAADHl1ErAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAlNJREFUeF7tmj9LHEEYxo8gBrHxCwhpgoiIINiKXcAi2IidVST4pxCtBIt8hoBF
+        umC6VPkOQQQL0cJOiGAXRBFRJEX0eeAWluV1d2d25Gb2nh/8qtu7e9/3dmbfm5mOEEIIIYQQQgghhBBC
+        CNG/jMMV+A0ewr/wHv6D1/Ac/oI7cBa+gX3HW/gZnsInR//AXTgCWw/vjmV4Ca1iuHgDtyGL30pG4W9o
+        Jd/EE/getooP8ApaCYeQc94CbAVMhBO4lWhI+R2LMGnmoU+xDuBGV5f5jt/1ESbJO8iJ2UqsTLYWAzBj
+        ElrXveQdHINJwach7xIroSq3YBHXp+oRzBc9elahlUgdv8I8g/ARWteWyeGcBMOQ3bqVRB05Dy1BFmoI
+        7kPruioZA2OJHg4pKwFXWTifB0Zea3hHxxm0gu+FjCVqJqAVeC9lTNGyDq2gq9yEcyVeQOt9dWRM0fIT
+        WkFXyaKU0WSY/4DR4pvYaxbsGEaLT79EuUC415WLhEWaFIztRbRYAbu6BouoYCWGLtgtjBbfIZm3r+6w
+        Jollhi5Y1JO+b1uRN3TBom4rfBvXvKELFnXjOg2toF0MXbApGDVN57GQBeP7oqfp8k7IgiWxvNN0ATFU
+        wZJZQCSuS9Tf4ZeuM7AIJ+7s9brFS2aJmrhuglT9+c5Tp3VJbhOEuGyzhSxYkttsGXU3cjnUuGtdR+5b
+        Wp9Bk97IzdBRAQ/4q7/mYZQH2JrDKBk67uQBn56foA7UOaIjmw0oHgrmQWBO4P8hWwQdChZCCCGEEEII
+        IYQQQgghOp1nMLXlyqgA4dAAAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="icon_manager" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEwAAABMCAYAAADHl1ErAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -230,9 +246,6 @@
   <data name="ribbon_download_status_stop" xml:space="preserve">
     <value>Stop</value>
   </data>
-  <data name="ribbon_project" xml:space="preserve">
-    <value>Project</value>
-  </data>
   <data name="ribbon_project_file" xml:space="preserve">
     <value>Project File</value>
   </data>
@@ -241,6 +254,9 @@
   </data>
   <data name="ribbon_project_file_load" xml:space="preserve">
     <value>Open</value>
+  </data>
+  <data name="ribbon_start" xml:space="preserve">
+    <value>Start</value>
   </data>
   <data name="startupui_title" xml:space="preserve">
     <value>Website Downloader</value>

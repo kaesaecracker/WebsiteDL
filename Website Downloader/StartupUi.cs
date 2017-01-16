@@ -19,5 +19,10 @@ namespace WebsiteDownloader
 
             InitializeComponent();
         }
+
+        private void ribbon_start_about_btn_Click(object sender, EventArgs e)
+        {
+            (new AboutBox()).ShowDialog();
+        }
     }
 }
