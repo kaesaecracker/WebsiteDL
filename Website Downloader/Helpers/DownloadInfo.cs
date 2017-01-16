@@ -19,14 +19,16 @@ namespace WebsiteDownloader.Helpers
         }
 
         // ConcurrentBag = thread-safe list 
-        internal ConcurrentBag<Action> Listeners { get; } = new ConcurrentBag<Action>();
+        internal Action Listener { get; } 
         internal string Source { get; }
         internal string Target { get; }
         internal Status DownloadStatus { get; set; }
 
-        internal DownloadInfo()
+        internal DownloadInfo(string source, string target, Action listener = null) // listener is optional
         {
-
+            Source = source;
+            Target = target;
+            Listener = listener;
         }
     }
 }

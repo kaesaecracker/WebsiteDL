@@ -43,6 +43,9 @@ namespace WebsiteDownloader
             {
                 webClient.DownloadFile(info.Source, info.Target);
             }
+
+            info.DownloadStatus = DownloadInfo.Status.FINISHED;
+            
         }
 
         #region Helper Methods
