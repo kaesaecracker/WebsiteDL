@@ -194,38 +194,38 @@ namespace WebsiteDownloader.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        internal static string ribbon_start {
+            get {
+                return ResourceManager.GetString("ribbon_start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Project File.
         /// </summary>
-        internal static string ribbon_project_file {
+        internal static string ribbon_start_file {
             get {
-                return ResourceManager.GetString("ribbon_project_file", resourceCulture);
+                return ResourceManager.GetString("ribbon_start_file", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Create.
         /// </summary>
-        internal static string ribbon_project_file_create {
+        internal static string ribbon_start_file_create {
             get {
-                return ResourceManager.GetString("ribbon_project_file_create", resourceCulture);
+                return ResourceManager.GetString("ribbon_start_file_create", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Open.
         /// </summary>
-        internal static string ribbon_project_file_load {
+        internal static string ribbon_start_file_load {
             get {
-                return ResourceManager.GetString("ribbon_project_file_load", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Start.
-        /// </summary>
-        internal static string ribbon_start {
-            get {
-                return ResourceManager.GetString("ribbon_start", resourceCulture);
+                return ResourceManager.GetString("ribbon_start_file_load", resourceCulture);
             }
         }
         

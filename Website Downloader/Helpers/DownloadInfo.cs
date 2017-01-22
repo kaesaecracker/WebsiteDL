@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WebsiteDownloader.Helpers
+﻿namespace WebsiteDownloader.Helpers
 {
-    class DownloadInfo
+    using System;
+
+    internal class DownloadInfo
     {
+        internal DownloadInfo(string source, string target, Action listener = null) // listener is optional
+        {
+            this.Source = source;
+            this.Target = target;
+            this.Listener = listener;
+        }
+
         internal enum Status
         {
             UNSET = 0, // = DEFAULT VALUE, not yet queued
@@ -19,16 +21,12 @@ namespace WebsiteDownloader.Helpers
         }
 
         // ConcurrentBag = thread-safe list 
-        internal Action Listener { get; } 
-        internal string Source { get; }
-        internal string Target { get; }
-        internal Status DownloadStatus { get; set; }
+        internal Action Listener { get; }
 
-        internal DownloadInfo(string source, string target, Action listener = null) // listener is optional
-        {
-            Source = source;
-            Target = target;
-            Listener = listener;
-        }
+        internal string Source { get; }
+
+        internal string Target { get; }
+
+        internal Status DownloadStatus { get; set; }
     }
 }

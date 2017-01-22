@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace WebsiteDownloader
+﻿namespace WebsiteDownloader
 {
+    using System;
+    using System.Windows.Forms;
+
     public partial class StartupUi : Form
     {
         public StartupUi()
@@ -17,10 +10,10 @@ namespace WebsiteDownloader
             // To test different languages:
             ///System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo("de-DE");
 
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
-        private void ribbon_start_about_btn_Click(object sender, EventArgs e)
+        private void AboutClick(object sender, EventArgs e)
         {
             (new AboutBox()).ShowDialog();
         }

@@ -246,17 +246,17 @@
   <data name="ribbon_download_status_stop" xml:space="preserve">
     <value>Stop</value>
   </data>
-  <data name="ribbon_project_file" xml:space="preserve">
-    <value>Project File</value>
-  </data>
-  <data name="ribbon_project_file_create" xml:space="preserve">
-    <value>Create</value>
-  </data>
-  <data name="ribbon_project_file_load" xml:space="preserve">
-    <value>Open</value>
-  </data>
   <data name="ribbon_start" xml:space="preserve">
     <value>Start</value>
+  </data>
+  <data name="ribbon_start_file" xml:space="preserve">
+    <value>Project File</value>
+  </data>
+  <data name="ribbon_start_file_create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="ribbon_start_file_load" xml:space="preserve">
+    <value>Open</value>
   </data>
   <data name="startupui_title" xml:space="preserve">
     <value>Website Downloader</value>
