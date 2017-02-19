@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    internal class OfflineStorage : ModuleTemplate
+    internal class Storage : ModuleTemplate
     {
         private List<Helpers.OfflineFile> files = new List<Helpers.OfflineFile>();
 

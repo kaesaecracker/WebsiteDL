@@ -7,7 +7,7 @@
     internal class Bridge : ModuleTemplate
     {
         private Downloader downloader = new Downloader();
-        private OfflineStorage storage = new OfflineStorage();
+        private Storage storage = new Storage();
 
         private Type[] serializationExtraTypes =
             {
