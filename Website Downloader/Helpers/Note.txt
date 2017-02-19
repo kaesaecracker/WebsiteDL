@@ -1,1 +1,1 @@
-﻿Helpers in this project are classes only containing information (and methods to store and retrieve it), but no actual functionality.
+﻿Classes mainly used to store data go here

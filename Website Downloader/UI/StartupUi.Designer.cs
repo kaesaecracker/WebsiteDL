@@ -38,7 +38,7 @@ namespace WebsiteDownloader
 
         private RibbonContents ribbon;
         private Panel top_panel;
-        
+
 
         /// <summary>
         /// Required designer variable.
@@ -159,7 +159,7 @@ namespace WebsiteDownloader
             // ribbon.start.about
             // 
             this.ribbon.start.about.Items.Add(this.ribbon.start.about_btn);
-            this.ribbon.start.about.Text = "About";
+            this.ribbon.start.about.Text = Properties.Resources.ribbon_start_about;
             // 
             // ribbon.start.about_btn
             // 
@@ -222,7 +222,7 @@ namespace WebsiteDownloader
             this.Controls.Add(this.top_panel);
             this.MinimumSize = new System.Drawing.Size(425, 39);
             this.Name = "StartupUi";
-            this.Text = "Website Downloader";
+            this.Text = Properties.Resources.startupui_title;
             this.top_panel.ResumeLayout(false);
             this.ResumeLayout(false);
 

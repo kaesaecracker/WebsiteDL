@@ -1,7 +1,7 @@
 #WebsiteDL
 Downloads a website (HTML), contained images, scripts and videos, recursively downloads hyperlinked sites too.
 
-**Note: Not yet runnable**
+**This Project is WIP and not yet in a working state**
 
 #License
 As long as you accept the licenses below, we do not care what you do with this source code.

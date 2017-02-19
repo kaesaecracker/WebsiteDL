@@ -4,7 +4,7 @@
 
     internal class DownloadInfo
     {
-        internal DownloadInfo(string source, string target, Action listener = null) // listener is optional
+        internal DownloadInfo(string source, string target, Action<DownloadInfo> listener = null) // listener is optional
         {
             this.Source = source;
             this.Target = target;
@@ -21,7 +21,7 @@
         }
 
         // ConcurrentBag = thread-safe list 
-        internal Action Listener { get; }
+        internal Action<DownloadInfo> Listener { get; }
 
         internal string Source { get; }
 

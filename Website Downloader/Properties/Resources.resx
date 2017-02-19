@@ -249,6 +249,9 @@
   <data name="ribbon_start" xml:space="preserve">
     <value>Start</value>
   </data>
+  <data name="ribbon_start_about" xml:space="preserve">
+    <value>About</value>
+  </data>
   <data name="ribbon_start_file" xml:space="preserve">
     <value>Project File</value>
   </data>

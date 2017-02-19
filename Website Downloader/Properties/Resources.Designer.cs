@@ -203,6 +203,15 @@ namespace WebsiteDownloader.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string ribbon_start_about {
+            get {
+                return ResourceManager.GetString("ribbon_start_about", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Project File.
         /// </summary>
         internal static string ribbon_start_file {
