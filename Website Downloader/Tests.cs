@@ -1,5 +1,5 @@
 ﻿namespace WebsiteDownloader
-{  
+{
     using System;
     using System.IO;
     using System.Threading;
@@ -7,12 +7,18 @@
 
     using NUnit.Framework;
 
+    // TODO: task listener tests
     [TestFixture]
     public static class Tests
     {
+        private static string testBasePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\";
+        private static string downloadTestFile = testBasePath + "dlTest.html";
+        private static string editorTestFile = testBasePath + "editorTest.html";
+
         private static Thread uiThread;
 
         [SetUp]
+        [STAThread]
         public static void Init()
         {
             (uiThread = new Thread(() =>
@@ -24,25 +30,35 @@
         [TearDown]
         public static void Cleanup()
         {
-            if (File.Exists("test"))
+            // delete test files
+            string[] files = { downloadTestFile, editorTestFile };
+
+            foreach (var file in files)
             {
-                File.Delete("test");
+                if (File.Exists(file))
+                {
+                   // File.Delete(file);
+                }
             }
         }
 
         [Test]
-        [STAThread]
         public static void DownloadTest()
         {
             Modules.Downloader dl = new Modules.Downloader();
             dl.Start();
 
-            var info = new Helpers.DownloadInfo("https://google.com", "test", DownloadTest_DownloadListener);
+            var info = new Helpers.DownloadTask("https://github.com/markbeaton/TidyManaged/search?utf8=%E2%9C%93&q=badimageformat", downloadTestFile);
             dl.EnqueueInfo(info);
+
+            while (info.Status != Helpers.TaskStatus.FINISHED)
+            {
+            }
+
+            FileAssert.Exists("test");
         }
 
         [Test]
-        [STAThread]
         public static void OpenGui()
         {
             StartupUi ui = new StartupUi();
@@ -65,14 +81,35 @@
             Application.Exit();
         }
 
-        private static void DownloadTest_DownloadListener(Helpers.DownloadInfo info)
+        [TestCase("<!DOCTYPE html><html><head><title>Basic Test</title></head><body><p>Non-closed paraghraph and html tag</body>")]
+        public static void HtmlEditorTest(string fileContents)
         {
-            switch (info.DownloadStatus)
+            File.WriteAllText(editorTestFile, fileContents);
+
+            var file = new Helpers.OfflineFile(editorTestFile, null);
+            var task = new Helpers.EditorTask(file, (Helpers.TaskTemplate t) =>
             {
-                case Helpers.DownloadInfo.Status.FINISHED:
-                    FileAssert.Exists("test");
-                    break;
-            }
+                MessageBox.Show(t.Status.ToString());
+            });
+
+            var editor = new Modules.HtmlEditor();
+            Assert.That(editor.Running, Is.False);
+            Assert.That(editor.ShouldStop, Is.False);
+
+            editor.Start();
+            Assert.That(editor.Running, Is.True);
+            Assert.That(editor.ShouldStop, Is.False);
+
+            editor.Enqueue(task);
+        }
+
+        [Test]
+        public static void TidyTest()
+        {
+            string path = testBasePath + "o.html";
+            MessageBox.Show(path);
+
+            File.WriteAllText(path, Modules.HtmlEditor.Cleanup("<html><head></head><body></body></html>"));
         }
     }
 }

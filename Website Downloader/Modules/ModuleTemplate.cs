@@ -15,6 +15,7 @@
             if (this.runThread == null)
             {
                 this.runThread = new Thread(this.Loop);
+                Running = true;
             }
             else
             {

@@ -13,7 +13,7 @@
             {
                 typeof(Downloader),
                 typeof(Helpers.OfflineFile),
-                typeof(Helpers.DownloadInfo)
+                typeof(Helpers.DownloadTask)
             };
 
         internal Bridge()
@@ -47,14 +47,16 @@
 
         internal Bridge LoadState(string save)
         {
-            var memStream = new MemoryStream();
-            var memWriter = new StreamWriter(memStream);
-            memWriter.Write(save);
-            memWriter.Flush();
+            using (var memStream = new MemoryStream())
+            {
+                var memWriter = new StreamWriter(memStream);
+                memWriter.Write(save);
+                memWriter.Flush();
 
-            var ser = new XmlSerializer(typeof(Bridge), extraTypes: this.serializationExtraTypes);
+                var ser = new XmlSerializer(typeof(Bridge), extraTypes: this.serializationExtraTypes);
 
-            return (Bridge)ser.Deserialize(memStream);
+                return (Bridge)ser.Deserialize(memStream);
+            }
         }
     }
 }
