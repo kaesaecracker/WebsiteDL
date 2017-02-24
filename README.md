@@ -10,3 +10,5 @@ As long as you accept the licenses below, we do not care what you do with this s
 The used icons come from  [modernuiicons.com](http://modernuiicons.com/). A copy of the license can be found in the Icons folder.
 #####Ribbons
 The Ribbons are from [officeribbon.codeplex.com](https://officeribbon.codeplex.com/), published under the Microsoft Public License (Ms-PL).
+#####HTML file cleanup
+This project uses [TidyManaged](https://github.com/markbeaton/TidyManaged) which requires [tidy-html](https://github.com/htacg/tidy-html5).
