@@ -99,13 +99,11 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="TidyManaged, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TidyManaged.1.0.0.0\lib\net20\TidyManaged.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="Helpers\EditorTask.cs" />
+    <Compile Include="Helpers\ProjectSettings.cs" />
     <Compile Include="Helpers\TaskStatus.cs" />
     <Compile Include="Helpers\TaskTemplate.cs" />
     <Compile Include="Modules\HtmlEditor.cs" />
@@ -121,18 +119,17 @@
     <Compile Include="Helpers\DownloadTask.cs" />
     <Compile Include="Modules\ModuleTemplate.cs" />
     <Compile Include="Modules\Storage.cs" />
-    <Compile Include="Starter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="UI\StartupUi.cs">
+    <Compile Include="UI\MainUi.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\StartupUi.Designer.cs">
-      <DependentUpon>StartupUi.cs</DependentUpon>
+    <Compile Include="UI\MainUi.Designer.cs">
+      <DependentUpon>MainUi.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.de.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -146,9 +143,10 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\StartupUi.resx">
-      <DependentUpon>StartupUi.cs</DependentUpon>
+    <EmbeddedResource Include="UI\MainUi.resx">
+      <DependentUpon>MainUi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.de.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -184,7 +182,21 @@
   <ItemGroup>
     <Content Include="Modules\Note.txt" />
     <Content Include="Helpers\Note.txt" />
-    <Content Include="libtidy.dll">
+    <None Include="Resources\appbar.save.png" />
+    <None Include="Resources\appbar.folder.open.png" />
+    <None Include="Resources\appbar.page.new.png" />
+    <None Include="Resources\appbar.information.circle.png" />
+    <None Include="Resources\appbar.control.play.png" />
+    <None Include="Resources\appbar.control.stop.png" />
+    <None Include="Resources\appbar.browser.wire.png" />
+    <None Include="Resources\appbar.cabinet.variant.png" />
+    <None Include="Resources\appbar.information.png" />
+    <None Include="Resources\appbar.control.pause.png" />
+    <Content Include="Resources\SOURCE.txt" />
+    <Content Include="tidy\tidy.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tidy\tidy.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="UI\Note.txt" />

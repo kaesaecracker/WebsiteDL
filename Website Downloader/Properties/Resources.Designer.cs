@@ -63,9 +63,9 @@ namespace WebsiteDownloader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_browser {
+        internal static System.Drawing.Bitmap appbar_browser_wire {
             get {
-                object obj = ResourceManager.GetObject("icon_browser", resourceCulture);
+                object obj = ResourceManager.GetObject("appbar.browser.wire", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace WebsiteDownloader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_download_start {
+        internal static System.Drawing.Bitmap appbar_cabinet_variant {
             get {
-                object obj = ResourceManager.GetObject("icon_download_start", resourceCulture);
+                object obj = ResourceManager.GetObject("appbar.cabinet.variant", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace WebsiteDownloader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_download_stop {
+        internal static System.Drawing.Bitmap appbar_control_pause {
             get {
-                object obj = ResourceManager.GetObject("icon_download_stop", resourceCulture);
+                object obj = ResourceManager.GetObject("appbar.control.pause", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace WebsiteDownloader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_file_create {
+        internal static System.Drawing.Bitmap appbar_control_play {
             get {
-                object obj = ResourceManager.GetObject("icon_file_create", resourceCulture);
+                object obj = ResourceManager.GetObject("appbar.control.play", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace WebsiteDownloader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_file_load {
+        internal static System.Drawing.Bitmap appbar_control_stop {
             get {
-                object obj = ResourceManager.GetObject("icon_file_load", resourceCulture);
+                object obj = ResourceManager.GetObject("appbar.control.stop", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +113,9 @@ namespace WebsiteDownloader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_info {
+        internal static System.Drawing.Bitmap appbar_folder_open {
             get {
-                object obj = ResourceManager.GetObject("icon_info", resourceCulture);
+                object obj = ResourceManager.GetObject("appbar.folder.open", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +123,39 @@ namespace WebsiteDownloader.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_manager {
+        internal static System.Drawing.Bitmap appbar_information {
             get {
-                object obj = ResourceManager.GetObject("icon_manager", resourceCulture);
+                object obj = ResourceManager.GetObject("appbar.information", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap appbar_information_circle {
+            get {
+                object obj = ResourceManager.GetObject("appbar.information.circle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap appbar_page_new {
+            get {
+                object obj = ResourceManager.GetObject("appbar.page.new", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap appbar_save {
+            get {
+                object obj = ResourceManager.GetObject("appbar.save", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -221,20 +251,29 @@ namespace WebsiteDownloader.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create.
-        /// </summary>
-        internal static string ribbon_start_file_create {
-            get {
-                return ResourceManager.GetString("ribbon_start_file_create", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Open.
         /// </summary>
         internal static string ribbon_start_file_load {
             get {
                 return ResourceManager.GetString("ribbon_start_file_load", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string ribbon_start_file_save {
+            get {
+                return ResourceManager.GetString("ribbon_start_file_save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create.
+        /// </summary>
+        internal static string ribbon_start_file_saveAs {
+            get {
+                return ResourceManager.GetString("ribbon_start_file_saveAs", resourceCulture);
             }
         }
         

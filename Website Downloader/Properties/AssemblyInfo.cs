@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Website Downloader")]
-[assembly: AssemblyDescription("Downloads a website including embedded media, recursively downloads linked sites")]
+[assembly: AssemblyDescription("Downloads a website including embedded media, recursively downloads linked sites too. Written as a school project, source code availiable on GitHub.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Website Downloader")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyCopyright("Vinzenz Schroeter ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: System.CLSCompliant(true)]

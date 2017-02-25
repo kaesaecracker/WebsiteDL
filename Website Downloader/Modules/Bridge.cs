@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+    using System.Windows.Forms;
     using System.Xml.Serialization;
 
     internal class Bridge : ModuleTemplate
@@ -16,20 +17,24 @@
                 typeof(Helpers.DownloadTask)
             };
 
-        internal Bridge()
+        internal Bridge(Helpers.ProjectSettings settings)
         {
+            // IMPLEMENT Settings 
+
             this.downloader.Start();
             this.storage.Start();
         }
 
         internal override void LoopAction()
         {
+            // IMPLEMENT Bridge LoopAction
             throw new NotImplementedException();
         }
 
-        internal override void Stop()
+        internal override void Shutdown()
         {
-            this.downloader.ShouldStop = true;
+            this.downloader.Stop();
+            this.storage.Stop();
         }
 
         internal string SaveState()

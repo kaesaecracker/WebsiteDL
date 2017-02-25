@@ -5,6 +5,12 @@
 
     internal class OfflineFile
     {
+        public OfflineFile(string offlinePath, string onlineUri)
+        {
+            this.OfflinePath = offlinePath;
+            this.OnlineUri = onlineUri;
+        }
+
         internal string OfflinePath { get; private set; }
 
         internal string OnlineUri { get; set; }
@@ -22,11 +28,7 @@
             }
         }
 
-        public OfflineFile(string offlinePath, string onlineUri)
-        {
-            this.OfflinePath = offlinePath;
-            this.OnlineUri = onlineUri;
-        }
+        internal int NeededDepth { get; set; } // IMPROVE lower depth --> maybe additional downloads needed      
 
         internal XmlDocument GetXml()
         {
@@ -40,11 +42,11 @@
         {
             try
             {
-                File.Move(OfflinePath, newPath);
-                OfflinePath = newPath;
+                File.Move(this.OfflinePath, newPath);
+                this.OfflinePath = newPath;
                 return true;
             }
-            catch
+            catch (IOException)
             {
                 return false;
             }

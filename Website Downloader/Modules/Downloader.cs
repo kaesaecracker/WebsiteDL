@@ -22,12 +22,13 @@
             this.StartNewTasks();
         }
 
-        internal void EnqueueInfo(Helpers.DownloadTask info)
+        internal void Enqueue(Helpers.DownloadTask info)
         {
             this.infoQueue.Enqueue(info);
+            info.Status = Helpers.TaskStatus.ENQUEUED;
         }
 
-        internal override void Stop()
+        internal override void Shutdown()
         {
             // TODO stopp downloads
             this.tokenSource.Cancel();
@@ -35,7 +36,7 @@
 
         private static void Process(Helpers.DownloadTask info)
         {
-            info.Status = Helpers.TaskStatus.WORKING;
+            info.Status = Helpers.TaskStatus.INPROGRESS;
 
             // TODO cancel if token is cancelled
             using (WebClient webClient = new WebClient())
@@ -63,23 +64,17 @@
         private void StartNewTasks()
         {
             // TODO max parallel downloads setting
-            // var for stopping if error occurs
-            bool enqueueStop = false;
-
             // add new tasks if max is not reached
-            while (this.downloadTasks.Count < 10 && !this.infoQueue.IsEmpty && !enqueueStop)
+            while (this.downloadTasks.Count < 10 && !this.Paused && this.Running)
             {
                 // add new task
                 Helpers.DownloadTask info;
                 if (this.infoQueue.TryDequeue(out info))
                 {
-                    var task = Task.Run(() => Process(info), this.tokenSource.Token);
+                    var task = new Task(() => Process(info), this.tokenSource.Token);
                     this.downloadTasks.Add(task);
-                    System.Windows.Forms.MessageBox.Show("Enqueued Task");
-                }
-                else
-                {
-                    enqueueStop = true;
+
+                    task.Start();
                 }
             }
         }

@@ -6,22 +6,24 @@
     using System.Windows.Forms;
 
     using NUnit.Framework;
-
-    // TODO: task listener tests
+    
     [TestFixture]
     public static class Tests
     {
-        private static string testBasePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\";
-        private static string downloadTestFile = testBasePath + "dlTest.html";
-        private static string editorTestFile = testBasePath + "editorTest.html";
+        private const bool DELETE_TEST_FILES = false;
 
-        private static Thread uiThread;
+        private static string testBasePath = Constants.AppData + "Test/";
+        private static string downloadTestFile = testBasePath + "download.html";
+        private static string editorTestFile = testBasePath + "editor.html";
+        private static string cleanupTestFile = testBasePath + "cleanup.html";
 
         [SetUp]
         [STAThread]
         public static void Init()
         {
-            (uiThread = new Thread(() =>
+            Directory.CreateDirectory(testBasePath);
+
+            (new Thread(() =>
             {
                 Application.Run();
             })).Start();
@@ -30,14 +32,20 @@
         [TearDown]
         public static void Cleanup()
         {
-            // delete test files
-            string[] files = { downloadTestFile, editorTestFile };
+            // Close application
+            Application.Exit();
 
-            foreach (var file in files)
+            // delete test files
+            string[] files = { downloadTestFile, editorTestFile, cleanupTestFile };
+
+            if (DELETE_TEST_FILES)
             {
-                if (File.Exists(file))
+                foreach (var file in files)
                 {
-                   // File.Delete(file);
+                    if (File.Exists(file))
+                    {
+                        File.Delete(file);
+                    }
                 }
             }
         }
@@ -45,26 +53,35 @@
         [Test]
         public static void DownloadTest()
         {
-            Modules.Downloader dl = new Modules.Downloader();
+            var dl = new Modules.Downloader();
             dl.Start();
 
-            var info = new Helpers.DownloadTask("https://github.com/markbeaton/TidyManaged/search?utf8=%E2%9C%93&q=badimageformat", downloadTestFile);
-            dl.EnqueueInfo(info);
+            var info = new Helpers.DownloadTask(
+                "https://github.com/markbeaton/TidyManaged/search?utf8=%E2%9C%93&q=badimageformat",
+                downloadTestFile,
+                (Helpers.TaskTemplate task) =>
+                {
+                    if (task.Status == Helpers.TaskStatus.FINISHED)
+                    {
+                        Assert.That(downloadTestFile, Does.Exist);
+                    }
+
+                    ////MessageBox.Show(task.Status.ToString());
+                }
+
+            );
+            dl.Enqueue(info);
 
             while (info.Status != Helpers.TaskStatus.FINISHED)
-            {
-            }
-
-            FileAssert.Exists("test");
+            { }
         }
 
         [Test]
         public static void OpenGui()
         {
-            StartupUi ui = new StartupUi();
-            Thread uiThread;
+            var ui = new UI.MainUi();
 
-            (uiThread = new Thread(() =>
+            (new Thread(() =>
             {
                 Application.Run();
             })).Start();
@@ -87,29 +104,21 @@
             File.WriteAllText(editorTestFile, fileContents);
 
             var file = new Helpers.OfflineFile(editorTestFile, null);
-            var task = new Helpers.EditorTask(file, (Helpers.TaskTemplate t) =>
-            {
-                MessageBox.Show(t.Status.ToString());
-            });
+            var task = new Helpers.EditorTask(
+                file,
+                (Helpers.TaskTemplate t) =>
+                {
+                    MessageBox.Show(t.Status.ToString());
+                }
+            );
 
             var editor = new Modules.HtmlEditor();
             Assert.That(editor.Running, Is.False);
-            Assert.That(editor.ShouldStop, Is.False);
 
             editor.Start();
             Assert.That(editor.Running, Is.True);
-            Assert.That(editor.ShouldStop, Is.False);
 
             editor.Enqueue(task);
-        }
-
-        [Test]
-        public static void TidyTest()
-        {
-            string path = testBasePath + "o.html";
-            MessageBox.Show(path);
-
-            File.WriteAllText(path, Modules.HtmlEditor.Cleanup("<html><head></head><body></body></html>"));
         }
     }
 }

@@ -9,11 +9,13 @@
 
         internal override void LoopAction()
         {
+            //IMPLEMENT Storage LoopAction
             throw new NotImplementedException();
         }
 
-        internal override void Stop()
+        internal override void Shutdown()
         {
+            //IMPLEMENT Storage Shutdown
             throw new NotImplementedException();
         }
     }
