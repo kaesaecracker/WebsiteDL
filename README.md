@@ -1,6 +1,5 @@
 #WebsiteDL
 Downloads a website (HTML), contained images, scripts and videos, recursively downloads hyperlinked sites too.
-
 **This Project is WIP and not yet in a working state**
 
 #License
@@ -11,4 +10,4 @@ The used icons come from  [modernuiicons.com](http://modernuiicons.com/). A copy
 #####Ribbons
 The Ribbons are from [officeribbon.codeplex.com](https://officeribbon.codeplex.com/), published under the Microsoft Public License (Ms-PL).
 #####HTML file cleanup
-This project uses [TidyManaged](https://github.com/markbeaton/TidyManaged) which requires [tidy-html](https://github.com/htacg/tidy-html5).
+This project uses [tidy-html](https://github.com/htacg/tidy-html5).
