@@ -1,5 +1,5 @@
 language: csharp
-
+solution: Langzeitprojekt.sln
 matrix:
     - dotnet: latest
     - mono: latest
