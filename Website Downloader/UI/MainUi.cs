@@ -6,7 +6,7 @@
 
     public partial class MainUi : Form
     {
-        private Modules.Bridge bridge;
+        private Modules.Bridge bridge = new Modules.Bridge();
         private string projectFilePath = string.Empty;
 
         public MainUi()
@@ -53,13 +53,18 @@
 
         private void startBtn_Click(object sender, EventArgs e)
         {
-            if (!bridge.Running)
+            if (bridge.Paused || !bridge.Running)
             {
-                bridge.Start();
-            }
-            else if (bridge.Paused)
-            {
-                bridge.Resume();
+                ApplySettings();
+
+                if (!bridge.Running)
+                {
+                    bridge.Start();
+                }
+                else if (bridge.Paused)
+                {
+                    bridge.Resume();
+                }
             }
             else
             {
@@ -67,6 +72,56 @@
                 throw new InvalidOperationException("Should not have reached this state");
             }
 
+        }
+
+        // reads settings from ui and stores them in Statics.*
+        private void ApplySettings()
+        {
+            Statics.StartUri = form_startUriText.Text;
+
+            Statics.OfflineBaseDir = form_downloadBaseDir.Text;
+            if (!Statics.OfflineBaseDir.EndsWith("/") || !Statics.OfflineBaseDir.EndsWith("\\"))
+            {
+                Statics.OfflineBaseDir += "/";
+            }
+
+            Directory.CreateDirectory(Statics.OfflineBaseDir);
+
+
+            MessageBox.Show(Statics.OfflineBaseDir);
+
+            Statics.DownloadDepth = (int)form_downloadDepthNum.Value;
+
+            // Checkboxes
+            for (int i = 0; i < form_downloadTypesChkList.Items.Count - 1; i++)
+            {
+                string name = (string)form_downloadTypesChkList.Items[i];
+                string prefix = name.Split(':')[0];
+                bool value = form_downloadTypesChkList.GetItemChecked(i);
+
+                switch (prefix)
+                {
+                    case "img":
+                        Statics.DownloadImages = value;
+                        break;
+                    case "js":
+                        Statics.DownloadScripts = value;
+                        break;
+                    case "css":
+                        Statics.DownloadStyles = value;
+                        break;
+                    case "obj":
+                        Statics.DownloadObjects = value;
+                        break;
+
+                    default:
+                        MessageBox.Show("There seems to be a problem with your checkbox list");
+                        break;
+                }
+            }
+
+            Statics.ParallelDownloads = (int)form_parallelDownloadsNum.Value;
+            Statics.ParallelEdits = (int)form_parallelEditsNum.Value;
         }
 
         private void pauseBtn_Click(object sender, EventArgs e)

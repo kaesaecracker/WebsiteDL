@@ -6,13 +6,13 @@
     using System.Windows.Forms;
 
     using NUnit.Framework;
-    
+
     [TestFixture]
     public static class Tests
     {
         private const bool DELETE_TEST_FILES = false;
 
-        private static string testBasePath = Constants.AppData + "Test/";
+        private static string testBasePath = Statics.AppData + "Test/";
         private static string downloadTestFile = testBasePath + "download.html";
         private static string editorTestFile = testBasePath + "editor.html";
         private static string cleanupTestFile = testBasePath + "cleanup.html";
@@ -57,16 +57,14 @@
             dl.Start();
 
             var info = new Helpers.DownloadTask(
-                "https://github.com/markbeaton/TidyManaged/search?utf8=%E2%9C%93&q=badimageformat",
-                downloadTestFile,
-                (Helpers.TaskTemplate task) =>
+                source: "https://github.com/markbeaton/TidyManaged/search?utf8=%E2%9C%93&q=badimageformat",
+                target: downloadTestFile,
+                listener: (Helpers.TaskTemplate task) =>
                 {
                     if (task.Status == Helpers.TaskStatus.FINISHED)
                     {
                         Assert.That(downloadTestFile, Does.Exist);
                     }
-
-                    ////MessageBox.Show(task.Status.ToString());
                 }
 
             );
@@ -119,6 +117,26 @@
             Assert.That(editor.Running, Is.True);
 
             editor.Enqueue(task);
+        }
+
+        [TestCase("google.com")]
+        [TestCase("https://google.com/search?q=test")]
+        [TestCase("www.google.com/help/index.html")]
+        [TestCase("Www.GOoglE.Co.uK/foo/bar/foobar.js")]
+        public static void LocalPathTest(string uri)
+        {
+            string path = Modules.Storage.GetLocalPath(uri);
+
+            MessageBox.Show(path);
+        }
+
+        [TestCase("google.com")]
+        [TestCase("https://google.com/search?q=test")]
+        [TestCase("www.google.com/help/index.html")]
+        [TestCase("Www.GOoglE.Co.uK/foo/bar/foobar.js")]
+        public static void NormalizeUriTest(string uri)
+        {
+            MessageBox.Show(Statics.NormalizeUri(uri));
         }
     }
 }

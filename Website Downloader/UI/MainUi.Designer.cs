@@ -43,7 +43,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.form = new System.Windows.Forms.TableLayoutPanel();
             this.form_startUriLbl = new System.Windows.Forms.Label();
-            this.form_startUriTxt = new System.Windows.Forms.TextBox();
+            this.form_startUriText = new System.Windows.Forms.TextBox();
             this.form_downloadDepthLbl = new System.Windows.Forms.Label();
             this.form_parallelEditsLbl = new System.Windows.Forms.Label();
             this.form_downloadDepthNum = new System.Windows.Forms.NumericUpDown();
@@ -54,7 +54,7 @@
             this.form_parallelDownloadsNum = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.form_downloadBaseDir = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -212,7 +212,7 @@
             this.form.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.form.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.form.Controls.Add(this.form_startUriLbl, 0, 0);
-            this.form.Controls.Add(this.form_startUriTxt, 1, 0);
+            this.form.Controls.Add(this.form_startUriText, 1, 0);
             this.form.Controls.Add(this.form_downloadDepthLbl, 0, 2);
             this.form.Controls.Add(this.form_parallelEditsLbl, 0, 4);
             this.form.Controls.Add(this.form_downloadDepthNum, 1, 2);
@@ -245,15 +245,15 @@
             this.form_startUriLbl.TabIndex = 0;
             this.form_startUriLbl.Text = "Start-URI";
             // 
-            // form_startUriTxt
+            // form_startUriText
             // 
-            this.form_startUriTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.form_startUriText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.form_startUriTxt.Location = new System.Drawing.Point(153, 3);
-            this.form_startUriTxt.Name = "form_startUriTxt";
-            this.form_startUriTxt.Size = new System.Drawing.Size(482, 20);
-            this.form_startUriTxt.TabIndex = 1;
-            this.form_startUriTxt.Text = "https://wikipedia.org/";
+            this.form_startUriText.Location = new System.Drawing.Point(153, 3);
+            this.form_startUriText.Name = "form_startUriText";
+            this.form_startUriText.Size = new System.Drawing.Size(482, 20);
+            this.form_startUriText.TabIndex = 1;
+            this.form_startUriText.Text = "https://wikipedia.org/";
             // 
             // form_downloadDepthLbl
             // 
@@ -307,10 +307,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.form_downloadTypesChkList.FormattingEnabled = true;
             this.form_downloadTypesChkList.Items.AddRange(new object[] {
-            "Images (<img src=* />)",
-            "JavaScript (<script src=* ></script>)",
-            "Stylesheets (<link rel=stylesheet href=* />)",
-            "Objects (<object data=*>)"});
+            "img: Images (<img src=* />)",
+            "js:    JavaScript (<script src=* ></script>)",
+            "css: Stylesheets (<link rel=stylesheet href=* />)",
+            "obj: Objects (<object data=*>)"});
             this.form_downloadTypesChkList.Location = new System.Drawing.Point(153, 29);
             this.form_downloadTypesChkList.Name = "form_downloadTypesChkList";
             this.form_downloadTypesChkList.Size = new System.Drawing.Size(482, 64);
@@ -379,7 +379,7 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 450F));
-            this.tableLayoutPanel1.Controls.Add(this.textBox1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.form_downloadBaseDir, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.button1, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(153, 177);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -388,15 +388,16 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(482, 27);
             this.tableLayoutPanel1.TabIndex = 11;
             // 
-            // textBox1
+            // form_downloadBaseDir
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.form_downloadBaseDir.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(35, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(444, 20);
-            this.textBox1.TabIndex = 0;
+            this.form_downloadBaseDir.Location = new System.Drawing.Point(35, 3);
+            this.form_downloadBaseDir.Name = "form_downloadBaseDir";
+            this.form_downloadBaseDir.Size = new System.Drawing.Size(444, 20);
+            this.form_downloadBaseDir.TabIndex = 0;
+            this.form_downloadBaseDir.Text = "C:\\DLTest";
             // 
             // button1
             // 
@@ -647,7 +648,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TableLayoutPanel form;
         private System.Windows.Forms.Label form_startUriLbl;
-        private System.Windows.Forms.TextBox form_startUriTxt;
+        private System.Windows.Forms.TextBox form_startUriText;
         private System.Windows.Forms.Label form_downloadDepthLbl;
         private System.Windows.Forms.Label form_parallelEditsLbl;
         private System.Windows.Forms.NumericUpDown form_downloadDepthNum;
@@ -674,7 +675,7 @@
         private System.Windows.Forms.SaveFileDialog saveFileDlg;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox form_downloadBaseDir;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label label2;

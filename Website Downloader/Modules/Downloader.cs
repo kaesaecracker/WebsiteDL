@@ -2,6 +2,7 @@
 {
     using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.IO;
     using System.Net;
     using System.Threading;
     using System.Threading.Tasks;
@@ -11,10 +12,10 @@
         // List that contains running download tasks
         private List<Task> downloadTasks = new List<Task>();
 
-        private CancellationTokenSource tokenSource = new CancellationTokenSource();
-
         // ConcurrentQueue = thread-safe queue (first-in-first-out)
         private ConcurrentQueue<Helpers.DownloadTask> infoQueue = new ConcurrentQueue<Helpers.DownloadTask>();
+
+        internal ConcurrentQueue<Helpers.OfflineFile> FinishedTasks { get; private set; } = new ConcurrentQueue<Helpers.OfflineFile>();
 
         internal override void LoopAction()
         {
@@ -28,26 +29,39 @@
             info.Status = Helpers.TaskStatus.ENQUEUED;
         }
 
-        internal override void Shutdown()
+        private void Process(Helpers.DownloadTask info)
         {
-            // TODO stopp downloads
-            this.tokenSource.Cancel();
-        }
-
-        private static void Process(Helpers.DownloadTask info)
-        {
+            // IMPROVE cancel download
+            
             info.Status = Helpers.TaskStatus.INPROGRESS;
 
-            // TODO cancel if token is cancelled
+            // Create folder if it does not exist
+            string folder = info.Target.Substring(0, info.Target.LastIndexOf("/"));
+            Directory.CreateDirectory(folder);
+
+            System.Windows.Forms.MessageBox.Show("src=" + info.Source + ", target=" + info.Target);
             using (WebClient webClient = new WebClient())
             {
                 webClient.DownloadFile(info.Source, info.Target);
             }
 
+            System.Windows.Forms.MessageBox.Show("test");
+
+            this.FinishedTasks.Enqueue(new Helpers.OfflineFile(info));
             info.Status = Helpers.TaskStatus.FINISHED;
         }
 
-        #region Helper Methods
+        #region Start & Stop
+        internal override void WaitForShutdown()
+        {
+            foreach (var task in downloadTasks)
+            {
+                task.Wait();
+            }
+        }
+        #endregion
+
+        #region Task add & remove
 
         private void RemoveFinishedTasks()
         {
@@ -63,15 +77,14 @@
 
         private void StartNewTasks()
         {
-            // TODO max parallel downloads setting
             // add new tasks if max is not reached
-            while (this.downloadTasks.Count < 10 && !this.Paused && this.Running)
+            while (this.downloadTasks.Count < Statics.ParallelDownloads && !this.Paused && this.Running)
             {
                 // add new task
                 Helpers.DownloadTask info;
                 if (this.infoQueue.TryDequeue(out info))
                 {
-                    var task = new Task(() => Process(info), this.tokenSource.Token);
+                    var task = new Task(() => Process(info));
                     this.downloadTasks.Add(task);
 
                     task.Start();

@@ -101,9 +101,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants.cs" />
+    <Compile Include="Statics.cs" />
     <Compile Include="Helpers\EditorTask.cs" />
-    <Compile Include="Helpers\ProjectSettings.cs" />
     <Compile Include="Helpers\TaskStatus.cs" />
     <Compile Include="Helpers\TaskTemplate.cs" />
     <Compile Include="Modules\HtmlEditor.cs" />

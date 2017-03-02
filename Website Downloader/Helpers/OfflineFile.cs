@@ -5,10 +5,15 @@
 
     internal class OfflineFile
     {
+
         public OfflineFile(string offlinePath, string onlineUri)
         {
             this.OfflinePath = offlinePath;
             this.OnlineUri = onlineUri;
+        }
+
+        public OfflineFile(DownloadTask info):this(info.Target,info.Source)
+        {            
         }
 
         internal string OfflinePath { get; private set; }
