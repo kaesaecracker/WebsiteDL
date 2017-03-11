@@ -1,4 +1,4 @@
-#WebsiteDL
+#WebsiteDL [![Build Status](https://travis-ci.com/kaesaecracker/WebsiteDL.svg?token=s27ut2zapWznghm2Xav3&branch=master)](https://travis-ci.com/kaesaecracker/WebsiteDL)
 Downloads a website (HTML), contained images, scripts and videos, recursively downloads hyperlinked sites too.
 **This Project is WIP and not yet in a working state**
 
