@@ -22,6 +22,7 @@
             if (this.runThread == null)
             {
                 this.runThread = new Thread(() => this.Loop());
+                this.runThread.Name = "ModuleThread";
                 this.runThread.Start();
 
                 this.Running = true;
@@ -31,20 +32,15 @@
                 throw new InvalidOperationException("Module already running");
             }
 
-            AfterStart();
-        }
-
-        // run immediately after Start()
-        internal protected virtual void AfterStart()
-        {
+            this.AfterStart();
         }
 
         // stops enqueueing more tasks, but still keeps everything in memory etc
         internal void Pause()
         {
-            if (Running && !Paused)
+            if (this.Running && !this.Paused)
             {
-                Paused = true;
+                this.Paused = true;
             }
             else
             {
@@ -55,34 +51,27 @@
         // resumes queueing
         internal void Resume()
         {
-            if (Running && Paused)
+            if (this.Running && this.Paused)
             {
-                Paused = false;
+                this.Paused = false;
             }
             else
             {
                 throw new InvalidOperationException("Not paused or not running");
             }
-
         }
-
 
         internal void Stop()
         {
-            if (Running)
+            if (this.Running)
             {
-                Running = false;
-                AfterStop();
+                this.Running = false;
+                this.AfterStop();
             }
             else
             {
-                throw new InvalidOperationException("Not running");
+                throw new InvalidOperationException("Not running"); // TODO stop erroring when crashing
             }
-        }
-
-        // Called immediately after Stop()
-        protected internal virtual void AfterStop()
-        {
         }
 
         internal void Loop()
@@ -103,5 +92,15 @@
 
         // waits for everything to stop
         internal abstract void WaitForShutdown();
+
+        // run immediately after Start()
+        protected internal virtual void AfterStart()
+        {
+        }
+
+        // Called immediately after Stop()
+        protected internal virtual void AfterStop()
+        {
+        }
     }
 }

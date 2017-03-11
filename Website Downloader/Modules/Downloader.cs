@@ -6,6 +6,7 @@
     using System.Net;
     using System.Threading;
     using System.Threading.Tasks;
+    using System.Windows.Forms;
 
     internal class Downloader : ModuleTemplate
     {
@@ -13,9 +14,9 @@
         private List<Task> downloadTasks = new List<Task>();
 
         // ConcurrentQueue = thread-safe queue (first-in-first-out)
-        private ConcurrentQueue<Helpers.DownloadTask> infoQueue = new ConcurrentQueue<Helpers.DownloadTask>();
+        private ConcurrentQueue<OfflineFile> infoQueue = new ConcurrentQueue<OfflineFile>();
 
-        internal ConcurrentQueue<Helpers.OfflineFile> FinishedTasks { get; private set; } = new ConcurrentQueue<Helpers.OfflineFile>();
+        internal ConcurrentQueue<OfflineFile> FinishedTasks { get; private set; } = new ConcurrentQueue<OfflineFile>();
 
         internal override void LoopAction()
         {
@@ -23,74 +24,86 @@
             this.StartNewTasks();
         }
 
-        internal void Enqueue(Helpers.DownloadTask info)
+        internal void Enqueue(OfflineFile file)
         {
-            this.infoQueue.Enqueue(info);
-            info.Status = Helpers.TaskStatus.ENQUEUED;
+            file.FileState = OfflineFile.State.DOWNLOAD;
+            this.infoQueue.Enqueue(file);
         }
 
-        private void Process(Helpers.DownloadTask info)
-        {
-            // IMPROVE cancel download
-            
-            info.Status = Helpers.TaskStatus.INPROGRESS;
-
-            // Create folder if it does not exist
-            string folder = info.Target.Substring(0, info.Target.LastIndexOf("/"));
-            Directory.CreateDirectory(folder);
-
-            System.Windows.Forms.MessageBox.Show("src=" + info.Source + ", target=" + info.Target);
-            using (WebClient webClient = new WebClient())
-            {
-                webClient.DownloadFile(info.Source, info.Target);
-            }
-
-            System.Windows.Forms.MessageBox.Show("test");
-
-            this.FinishedTasks.Enqueue(new Helpers.OfflineFile(info));
-            info.Status = Helpers.TaskStatus.FINISHED;
-        }
-
-        #region Start & Stop
         internal override void WaitForShutdown()
         {
-            foreach (var task in downloadTasks)
+            foreach (var task in this.downloadTasks)
             {
                 task.Wait();
             }
         }
-        #endregion
 
-        #region Task add & remove
+        private void Process(OfflineFile file)
+        {
+            // IMPROVE cancel download
+            // Create folder if it does not exist
+            string folder = file.OfflinePath.Substring(0, file.OfflinePath.LastIndexOf("/"));
+            Directory.CreateDirectory(folder);
+
+            Statics.Logger.Debug("Downloader.Process starting " + "src=" + file.OnlineUri + ", target=" + file.OfflinePath);
+            using (WebClient webClient = new WebClient())
+            {
+                try
+                {
+                    webClient.DownloadFile(file.OnlineUri, file.OfflinePath);
+                }
+                catch (WebException webEx)
+                {
+                    if (webEx.Status == WebExceptionStatus.NameResolutionFailure)
+                    {
+                        File.WriteAllText(file.OfflinePath, "<html><body>Could not resolve the address for the domain");
+                    }
+
+                    if (((HttpWebResponse)webEx.Response).StatusCode == HttpStatusCode.NotFound)
+                    {
+                        File.WriteAllText(file.OfflinePath, "<html><body>404 while trying to download");
+                    }
+                }
+            }
+
+            this.FinishedTasks.Enqueue(file);
+
+            Statics.Logger.Debug("Downloader.Process finished");
+        }
 
         private void RemoveFinishedTasks()
         {
             // cycle through task list to see if any of them has finished
-            this.downloadTasks.ForEach((task) =>
+            for (int i = 0; i < this.downloadTasks.Count;)
             {
+                var task = this.downloadTasks[i];
+
                 if (task.IsCompleted)
                 {
                     this.downloadTasks.Remove(task);
                 }
-            });
+                else
+                {
+                    i++;
+                }
+            }
         }
 
         private void StartNewTasks()
         {
             // add new tasks if max is not reached
-            while (this.downloadTasks.Count < Statics.ParallelDownloads && !this.Paused && this.Running)
+            while (this.infoQueue.Count > 0 && this.downloadTasks.Count < Statics.ParallelDownloads && !this.Paused && this.Running)
             {
                 // add new task
-                Helpers.DownloadTask info;
-                if (this.infoQueue.TryDequeue(out info))
+                OfflineFile file;
+                if (this.infoQueue.TryDequeue(out file))
                 {
-                    var task = new Task(() => Process(info));
+                    var task = new Task(() => this.Process(file));
                     this.downloadTasks.Add(task);
 
                     task.Start();
                 }
             }
         }
-        #endregion
     }
 }

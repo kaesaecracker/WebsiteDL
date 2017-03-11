@@ -84,6 +84,10 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.4.4\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.6.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.6.0\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
@@ -102,9 +106,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Statics.cs" />
-    <Compile Include="Helpers\EditorTask.cs" />
-    <Compile Include="Helpers\TaskStatus.cs" />
-    <Compile Include="Helpers\TaskTemplate.cs" />
     <Compile Include="Modules\HtmlEditor.cs" />
     <Compile Include="UI\AboutBox.cs">
       <SubType>Form</SubType>
@@ -112,10 +113,9 @@
     <Compile Include="UI\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\OfflineFile.cs" />
+    <Compile Include="OfflineFile.cs" />
     <Compile Include="Modules\Downloader.cs" />
     <Compile Include="Modules\Bridge.cs" />
-    <Compile Include="Helpers\DownloadTask.cs" />
     <Compile Include="Modules\ModuleTemplate.cs" />
     <Compile Include="Modules\Storage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -151,6 +151,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -180,7 +186,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Modules\Note.txt" />
-    <Content Include="Helpers\Note.txt" />
     <None Include="Resources\appbar.save.png" />
     <None Include="Resources\appbar.folder.open.png" />
     <None Include="Resources\appbar.page.new.png" />

@@ -36,12 +36,18 @@
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
+            // TODO check if stuff is runnign
             File.WriteAllText(projectFilePath, bridge.SaveState());
         }
 
         private void saveAsBtn_Click(object sender, EventArgs e)
         {
-
+            // TODO check if stuff is running
+            if (saveFileDlg.ShowDialog() == DialogResult.OK)
+            {
+                projectFilePath = saveFileDlg.FileName;
+                File.WriteAllText(projectFilePath, bridge.SaveState());
+            }
         }
 
         private void aboutBtn_Click(object sender, EventArgs e)
@@ -59,19 +65,20 @@
 
                 if (!bridge.Running)
                 {
+                    this.SetButtonsStart();
                     bridge.Start();
                 }
                 else if (bridge.Paused)
                 {
+                    this.SetButtonsResume();
                     bridge.Resume();
                 }
             }
             else
             {
-                // running but not paused --> button should have been deactivated
+                Statics.Logger.Error("MainUi - Start button was active although it shouldnt have been - FIXME");
                 throw new InvalidOperationException("Should not have reached this state");
             }
-
         }
 
         // reads settings from ui and stores them in Statics.*
@@ -87,17 +94,18 @@
 
             Directory.CreateDirectory(Statics.OfflineBaseDir);
 
-
-            MessageBox.Show(Statics.OfflineBaseDir);
+            Statics.Logger.Info("Starting download to " + Statics.OfflineBaseDir);
 
             Statics.DownloadDepth = (int)form_downloadDepthNum.Value;
 
             // Checkboxes
-            for (int i = 0; i < form_downloadTypesChkList.Items.Count - 1; i++)
+            for (int i = 0; i < form_downloadTypesChkList.Items.Count; i++)
             {
                 string name = (string)form_downloadTypesChkList.Items[i];
                 string prefix = name.Split(':')[0];
                 bool value = form_downloadTypesChkList.GetItemChecked(i);
+
+                Statics.Logger.Info("MainUi - Download " + prefix + "=" + value);
 
                 switch (prefix)
                 {
@@ -115,6 +123,7 @@
                         break;
 
                     default:
+                        Statics.Logger.Error("MainUi - Unknown checkbox list item: " + prefix);
                         MessageBox.Show("There seems to be a problem with your checkbox list");
                         break;
                 }
@@ -126,27 +135,59 @@
 
         private void pauseBtn_Click(object sender, EventArgs e)
         {
+            this.SetButtonsPause();
             bridge.Pause();
         }
 
         private void stopBtn_Click(object sender, EventArgs e)
         {
+            this.SetButtonsStop();
             bridge.Stop();
         }
 
         private void openBrowserBtn_Click(object sender, EventArgs e)
         {
-
+            System.Diagnostics.Process.Start(Modules.Storage.GetLocalPath(Statics.StartUri));
         }
 
         private void openExplorerBtn_Click(object sender, EventArgs e)
         {
-
+            System.Diagnostics.Process.Start(Statics.OfflineBaseDir);
         }
 
-        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        private void MainUi_FormClosing(object sender, FormClosingEventArgs e)
         {
+            bridge.Stop();
+        }
 
+        private void MainUi_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            bridge.WaitForShutdown();
+            Application.Exit();
+        }
+
+        private void SetButtonsStart()
+        {
+            startBtn.Enabled = openBtn.Enabled = false;
+            pauseBtn.Enabled = stopBtn.Enabled = openBrowserBtn.Enabled = openExplorerBtn.Enabled = true;
+        }
+
+        private void SetButtonsStop()
+        {
+            startBtn.Enabled = openBtn.Enabled = true;
+            pauseBtn.Enabled = stopBtn.Enabled = false;
+        }
+
+        private void SetButtonsPause()
+        {
+            pauseBtn.Enabled = false;
+            startBtn.Enabled = true;
+        }
+
+        private void SetButtonsResume()
+        {
+            pauseBtn.Enabled = true;
+            startBtn.Enabled = false;
         }
     }
 }

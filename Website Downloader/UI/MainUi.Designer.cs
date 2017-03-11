@@ -446,7 +446,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(569, 215);
             this.tableLayoutPanel2.TabIndex = 0;
-            this.tableLayoutPanel2.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel2_Paint);
             // 
             // label2
             // 
@@ -616,6 +615,8 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "MainUi";
             this.Text = "WebsiteDL";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainUi_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainUi_FormClosed);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.form.ResumeLayout(false);
