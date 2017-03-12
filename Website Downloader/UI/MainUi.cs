@@ -141,8 +141,9 @@
 
         private void stopBtn_Click(object sender, EventArgs e)
         {
-            this.SetButtonsStop();
             bridge.Stop();
+            bridge.WaitForShutdown();
+            this.SetButtonsStop();
         }
 
         private void openBrowserBtn_Click(object sender, EventArgs e)
@@ -157,12 +158,19 @@
 
         private void MainUi_FormClosing(object sender, FormClosingEventArgs e)
         {
-            bridge.Stop();
+            if (bridge != null && bridge.Running)
+            {
+                bridge.Stop();
+            }
         }
 
         private void MainUi_FormClosed(object sender, FormClosedEventArgs e)
         {
-            bridge.WaitForShutdown();
+            if (bridge != null && bridge.Running)
+            {
+                bridge.WaitForShutdown();
+            }
+
             Application.Exit();
         }
 
@@ -188,6 +196,20 @@
         {
             pauseBtn.Enabled = true;
             startBtn.Enabled = false;
+        }
+
+        private void refreshBtn_Click(object sender, EventArgs e)
+        {
+            if (bridge == null)
+            {
+                downloadsInQueueLbl.Text = editsInQueueLbl.Text = downloadedTotalLbl.Text = "<not running>";
+            }
+            else
+            {
+                downloadsInQueueLbl.Text = bridge.DownloadsInQueue + " files";
+                editsInQueueLbl.Text = bridge.EditsInQueue + " files";
+                downloadedTotalLbl.Text = bridge.DownloadedFilesCount + " files";
+            }
         }
     }
 }

@@ -67,6 +67,7 @@
             {
                 this.Running = false;
                 this.AfterStop();
+                this.runThread = null;
             }
             else
             {
@@ -80,7 +81,10 @@
 
             while (this.Running)
             {
-                this.LoopAction();
+                if (!this.Paused)
+                {
+                    this.LoopAction();
+                }
             }
 
             this.Running = false;

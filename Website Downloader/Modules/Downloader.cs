@@ -11,12 +11,28 @@
     internal class Downloader : ModuleTemplate
     {
         // List that contains running download tasks
-        private List<Task> downloadTasks = new List<Task>();
+        private List<Task> currentDownloads = new List<Task>();
 
         // ConcurrentQueue = thread-safe queue (first-in-first-out)
-        private ConcurrentQueue<OfflineFile> infoQueue = new ConcurrentQueue<OfflineFile>();
+        private ConcurrentQueue<OfflineFile> downloadQueue = new ConcurrentQueue<OfflineFile>();
 
         internal ConcurrentQueue<OfflineFile> FinishedTasks { get; private set; } = new ConcurrentQueue<OfflineFile>();
+
+        internal int DownloadsInQueue
+        {
+            get
+            {
+                return this.currentDownloads.Count + this.downloadQueue.Count;
+            }
+        }
+
+        internal int CurrentlyDownloading
+        {
+            get
+            {
+                return this.currentDownloads.Count;
+            }
+        }
 
         internal override void LoopAction()
         {
@@ -27,12 +43,12 @@
         internal void Enqueue(OfflineFile file)
         {
             file.FileState = OfflineFile.State.DOWNLOAD;
-            this.infoQueue.Enqueue(file);
+            this.downloadQueue.Enqueue(file);
         }
 
         internal override void WaitForShutdown()
         {
-            foreach (var task in this.downloadTasks)
+            foreach (var task in this.currentDownloads)
             {
                 task.Wait();
             }
@@ -54,15 +70,22 @@
                 }
                 catch (WebException webEx)
                 {
-                    if (webEx.Status == WebExceptionStatus.NameResolutionFailure)
+                    Statics.Logger.Warn("Download failed! URI=" + file.OnlineUri + ", OfflinePath=" + file.OfflinePath
+                        + ", Exception Status: " + webEx.Status.ToString() + ", Exception Message: " + webEx.Message);
+
+                    // TODO localisation
+                    string fileContent = "<html><body>"
+                        + "An error occured while downloading the file. The online version can be found <a href='" + file.OnlineUri + "'>here</a><br/>"
+                        + "Some additional information: <br/>"
+                        + "Status: " + webEx.Status.ToString() + "<br/>"
+                        + "Message: " + webEx.Message + "<br/>";
+
+                    if (webEx.Response != null)
                     {
-                        File.WriteAllText(file.OfflinePath, "<html><body>Could not resolve the address for the domain");
+                        fileContent += "HTTP Response: " + ((HttpWebResponse)webEx.Response).StatusCode.ToString();
                     }
 
-                    if (((HttpWebResponse)webEx.Response).StatusCode == HttpStatusCode.NotFound)
-                    {
-                        File.WriteAllText(file.OfflinePath, "<html><body>404 while trying to download");
-                    }
+                    file.ContentText = fileContent;
                 }
             }
 
@@ -74,13 +97,13 @@
         private void RemoveFinishedTasks()
         {
             // cycle through task list to see if any of them has finished
-            for (int i = 0; i < this.downloadTasks.Count;)
+            for (int i = 0; i < this.currentDownloads.Count;)
             {
-                var task = this.downloadTasks[i];
+                var task = this.currentDownloads[i];
 
                 if (task.IsCompleted)
                 {
-                    this.downloadTasks.Remove(task);
+                    this.currentDownloads.Remove(task);
                 }
                 else
                 {
@@ -92,14 +115,14 @@
         private void StartNewTasks()
         {
             // add new tasks if max is not reached
-            while (this.infoQueue.Count > 0 && this.downloadTasks.Count < Statics.ParallelDownloads && !this.Paused && this.Running)
+            while (this.downloadQueue.Count > 0 && this.currentDownloads.Count < Statics.ParallelDownloads && !this.Paused && this.Running)
             {
                 // add new task
                 OfflineFile file;
-                if (this.infoQueue.TryDequeue(out file))
+                if (this.downloadQueue.TryDequeue(out file))
                 {
                     var task = new Task(() => this.Process(file));
-                    this.downloadTasks.Add(task);
+                    this.currentDownloads.Add(task);
 
                     task.Start();
                 }

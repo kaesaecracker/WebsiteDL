@@ -21,6 +21,30 @@
                 typeof(OfflineFile)
             };
 
+        internal int DownloadsInQueue
+        {
+            get
+            {
+                return this.downloader.DownloadsInQueue;
+            }
+        }
+
+        internal int EditsInQueue
+        {
+            get
+            {
+                return this.editor.EditsInQueue;
+            }
+        }
+
+        internal int DownloadedFilesCount
+        {
+            get
+            {
+                return this.storage.DownloadedFilesCount;
+            }
+        }
+
         internal override void LoopAction()
         {
             OfflineFile file = null;
@@ -60,7 +84,7 @@
             this.storage.WaitForShutdown();
             this.editor.WaitForShutdown();
         }
-        
+
         internal string SaveState()
         {
             XmlSerializer ser = new XmlSerializer(typeof(Bridge), extraTypes: this.serializationExtraTypes);

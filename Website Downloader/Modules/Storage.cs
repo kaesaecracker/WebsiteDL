@@ -11,6 +11,14 @@
 
         private ConcurrentQueue<OfflineFile> filesToAdd = new ConcurrentQueue<OfflineFile>();
 
+        public int DownloadedFilesCount
+        {
+            get
+            {
+                return this.files.Count + this.filesToAdd.Count;
+            }
+        }
+
         internal static string GetLocalPath(string uri)
         {
             UriBuilder uriBuilder = new UriBuilder(uri);
@@ -24,10 +32,20 @@
 
             path += uriBuilder.Path;
 
+            // path is a folder without / at the end
+            if (!path.Substring(path.LastIndexOf('/')).Contains("."))
+            {
+                path += "/";
+            }
+
+            // path is a folder
             if (path.EndsWith("/"))
             {
                 path += "index.html";
             }
+
+            // HACK URIs with ':' proper escaping
+            path = path.Replace(':', ';');
 
             return Statics.OfflineBaseDir + path;
         }
@@ -40,7 +58,7 @@
         // returns yes if online uri is contained in one of the files
         internal bool IsDownloadedOrEnqueued(OfflineFile file)
         {
-            foreach(var f in this.files)
+            foreach (var f in this.files)
             {
                 if (f.OfflinePath == file.OfflinePath)
                 {

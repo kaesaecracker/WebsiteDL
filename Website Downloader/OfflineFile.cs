@@ -14,10 +14,10 @@
 
         internal enum State
         {
-            FOUND=10,
-            DOWNLOAD=50,
-            EDIT=80,
-            FINISHED=100
+            FOUND = 10,
+            DOWNLOAD = 50,
+            EDIT = 80,
+            FINISHED = 100
         }
 
         internal string OfflinePath { get; private set; }
@@ -32,7 +32,7 @@
             {
                 if (this.FileState > State.DOWNLOAD)
                 {
-                return File.ReadAllText(this.OfflinePath);
+                    return File.ReadAllText(this.OfflinePath);
                 }
                 else
                 {
@@ -106,7 +106,7 @@
             // TODO escape query
             System.Uri uri = new System.Uri(uriStr);
 
-            return (uri.Scheme == "https" ? "http" : uri.Scheme) + "://" + (uri.Host.StartsWith("www.") ? uri.Host.Remove(0, 4) : uri.Host) + uri.PathAndQuery;
+            return uri.Scheme + "://" + (uri.Host.StartsWith("www.") ? uri.Host.Remove(0, 4) : uri.Host) + uri.PathAndQuery;
         }
     }
 }

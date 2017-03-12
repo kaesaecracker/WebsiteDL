@@ -60,10 +60,7 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.fileStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.downloadStrip = new System.Windows.Forms.ToolStrip();
@@ -75,6 +72,10 @@
             this.openExplorerBtn = new System.Windows.Forms.ToolStripButton();
             this.openFileDlg = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDlg = new System.Windows.Forms.SaveFileDialog();
+            this.refreshBtn = new System.Windows.Forms.Button();
+            this.downloadsInQueueLbl = new System.Windows.Forms.Label();
+            this.editsInQueueLbl = new System.Windows.Forms.Label();
+            this.downloadedTotalLbl = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.form.SuspendLayout();
@@ -189,7 +190,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 81);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(649, 256);
+            this.tabControl1.Size = new System.Drawing.Size(555, 248);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -198,21 +199,18 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(641, 230);
+            this.tabPage1.Size = new System.Drawing.Size(547, 222);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // form
             // 
-            this.form.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.form.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.form.ColumnCount = 2;
             this.form.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.form.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.form.Controls.Add(this.form_startUriLbl, 0, 0);
-            this.form.Controls.Add(this.form_startUriText, 1, 0);
             this.form.Controls.Add(this.form_downloadDepthLbl, 0, 2);
             this.form.Controls.Add(this.form_parallelEditsLbl, 0, 4);
             this.form.Controls.Add(this.form_downloadDepthNum, 1, 2);
@@ -223,7 +221,9 @@
             this.form.Controls.Add(this.form_parallelDownloadsNum, 1, 3);
             this.form.Controls.Add(this.label1, 0, 6);
             this.form.Controls.Add(this.tableLayoutPanel1, 1, 6);
-            this.form.Location = new System.Drawing.Point(1, 6);
+            this.form.Controls.Add(this.form_startUriText, 1, 0);
+            this.form.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.form.Location = new System.Drawing.Point(3, 3);
             this.form.Name = "form";
             this.form.RowCount = 7;
             this.form.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -233,7 +233,7 @@
             this.form.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.form.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.form.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.form.Size = new System.Drawing.Size(638, 218);
+            this.form.Size = new System.Drawing.Size(541, 216);
             this.form.TabIndex = 5;
             // 
             // form_startUriLbl
@@ -247,11 +247,10 @@
             // 
             // form_startUriText
             // 
-            this.form_startUriText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.form_startUriText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.form_startUriText.Location = new System.Drawing.Point(153, 3);
             this.form_startUriText.Name = "form_startUriText";
-            this.form_startUriText.Size = new System.Drawing.Size(482, 20);
+            this.form_startUriText.Size = new System.Drawing.Size(385, 20);
             this.form_startUriText.TabIndex = 1;
             this.form_startUriText.Text = "https://wikipedia.org/";
             // 
@@ -275,8 +274,7 @@
             // 
             // form_downloadDepthNum
             // 
-            this.form_downloadDepthNum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.form_downloadDepthNum.Dock = System.Windows.Forms.DockStyle.Fill;
             this.form_downloadDepthNum.Location = new System.Drawing.Point(153, 99);
             this.form_downloadDepthNum.Minimum = new decimal(new int[] {
             1,
@@ -284,7 +282,7 @@
             0,
             0});
             this.form_downloadDepthNum.Name = "form_downloadDepthNum";
-            this.form_downloadDepthNum.Size = new System.Drawing.Size(482, 20);
+            this.form_downloadDepthNum.Size = new System.Drawing.Size(385, 20);
             this.form_downloadDepthNum.TabIndex = 5;
             this.form_downloadDepthNum.Value = new decimal(new int[] {
             5,
@@ -303,8 +301,7 @@
             // 
             // form_downloadTypesChkList
             // 
-            this.form_downloadTypesChkList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.form_downloadTypesChkList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.form_downloadTypesChkList.FormattingEnabled = true;
             this.form_downloadTypesChkList.Items.AddRange(new object[] {
             "img: Images (<img src=* />)",
@@ -313,24 +310,23 @@
             "obj: Objects (<object data=*>)"});
             this.form_downloadTypesChkList.Location = new System.Drawing.Point(153, 29);
             this.form_downloadTypesChkList.Name = "form_downloadTypesChkList";
-            this.form_downloadTypesChkList.Size = new System.Drawing.Size(482, 64);
+            this.form_downloadTypesChkList.Size = new System.Drawing.Size(385, 64);
             this.form_downloadTypesChkList.TabIndex = 3;
             // 
             // form_parallelEditsNum
             // 
-            this.form_parallelEditsNum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.form_parallelEditsNum.Dock = System.Windows.Forms.DockStyle.Fill;
             this.form_parallelEditsNum.Location = new System.Drawing.Point(153, 151);
-            this.form_parallelEditsNum.Minimum = new decimal(new int[] {
-            1,
+            this.form_parallelEditsNum.Maximum = new decimal(new int[] {
+            10000,
             0,
             0,
             0});
             this.form_parallelEditsNum.Name = "form_parallelEditsNum";
-            this.form_parallelEditsNum.Size = new System.Drawing.Size(482, 20);
+            this.form_parallelEditsNum.Size = new System.Drawing.Size(385, 20);
             this.form_parallelEditsNum.TabIndex = 9;
             this.form_parallelEditsNum.Value = new decimal(new int[] {
-            10,
+            20,
             0,
             0,
             0});
@@ -346,19 +342,18 @@
             // 
             // form_parallelDownloadsNum
             // 
-            this.form_parallelDownloadsNum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.form_parallelDownloadsNum.Dock = System.Windows.Forms.DockStyle.Fill;
             this.form_parallelDownloadsNum.Location = new System.Drawing.Point(153, 125);
-            this.form_parallelDownloadsNum.Minimum = new decimal(new int[] {
-            1,
+            this.form_parallelDownloadsNum.Maximum = new decimal(new int[] {
+            10000,
             0,
             0,
             0});
             this.form_parallelDownloadsNum.Name = "form_parallelDownloadsNum";
-            this.form_parallelDownloadsNum.Size = new System.Drawing.Size(482, 20);
+            this.form_parallelDownloadsNum.Size = new System.Drawing.Size(385, 20);
             this.form_parallelDownloadsNum.TabIndex = 8;
             this.form_parallelDownloadsNum.Value = new decimal(new int[] {
-            10,
+            20,
             0,
             0,
             0});
@@ -385,7 +380,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(482, 27);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(385, 27);
             this.tableLayoutPanel1.TabIndex = 11;
             // 
             // form_downloadBaseDir
@@ -415,7 +410,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(641, 230);
+            this.tabPage2.Size = new System.Drawing.Size(547, 222);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Progress";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -426,80 +421,52 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label3, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label4, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label5, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label6, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.label7, 0, 5);
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.13473F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.86527F));
+            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label3, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label6, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.refreshBtn, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.downloadsInQueueLbl, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.editsInQueueLbl, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.downloadedTotalLbl, 1, 3);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 6);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 7;
+            this.tableLayoutPanel2.RowCount = 5;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(569, 215);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(535, 223);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.Location = new System.Drawing.Point(3, 35);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 13);
+            this.label2.Size = new System.Drawing.Size(101, 13);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Downloads in Queue";
+            this.label2.Text = "Queued Downloads";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 20);
+            this.label3.Location = new System.Drawing.Point(3, 55);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 13);
+            this.label3.Size = new System.Drawing.Size(71, 13);
             this.label3.TabIndex = 1;
-            this.label3.Text = "Edits in Queue";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 40);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(113, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Currently Downloading";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 60);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(83, 13);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "Currently Editing";
+            this.label3.Text = "Queued Edits";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 80);
+            this.label6.Location = new System.Drawing.Point(3, 75);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(94, 13);
+            this.label6.Size = new System.Drawing.Size(55, 13);
             this.label6.TabIndex = 4;
-            this.label6.Text = "Downloaded Total";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 100);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(64, 13);
-            this.label7.TabIndex = 5;
-            this.label7.Text = "Edited Total";
+            this.label6.Text = "Files Total";
             // 
             // fileStrip
             // 
@@ -605,11 +572,52 @@
             this.openFileDlg.Filter = "WebsiteDL Projects|*.wdlp,*.xml";
             this.openFileDlg.SupportMultiDottedExtensions = true;
             // 
+            // refreshBtn
+            // 
+            this.refreshBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.SetColumnSpan(this.refreshBtn, 2);
+            this.refreshBtn.Location = new System.Drawing.Point(3, 3);
+            this.refreshBtn.Name = "refreshBtn";
+            this.refreshBtn.Size = new System.Drawing.Size(529, 29);
+            this.refreshBtn.TabIndex = 5;
+            this.refreshBtn.Text = "Refresh";
+            this.refreshBtn.UseVisualStyleBackColor = true;
+            this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
+            // 
+            // downloadsInQueueLbl
+            // 
+            this.downloadsInQueueLbl.AutoSize = true;
+            this.downloadsInQueueLbl.Location = new System.Drawing.Point(148, 35);
+            this.downloadsInQueueLbl.Name = "downloadsInQueueLbl";
+            this.downloadsInQueueLbl.Size = new System.Drawing.Size(76, 13);
+            this.downloadsInQueueLbl.TabIndex = 6;
+            this.downloadsInQueueLbl.Text = "<click refresh>";
+            // 
+            // editsInQueueLbl
+            // 
+            this.editsInQueueLbl.AutoSize = true;
+            this.editsInQueueLbl.Location = new System.Drawing.Point(148, 55);
+            this.editsInQueueLbl.Name = "editsInQueueLbl";
+            this.editsInQueueLbl.Size = new System.Drawing.Size(76, 13);
+            this.editsInQueueLbl.TabIndex = 7;
+            this.editsInQueueLbl.Text = "<click refresh>";
+            // 
+            // downloadedTotalLbl
+            // 
+            this.downloadedTotalLbl.AutoSize = true;
+            this.downloadedTotalLbl.Location = new System.Drawing.Point(148, 75);
+            this.downloadedTotalLbl.Name = "downloadedTotalLbl";
+            this.downloadedTotalLbl.Size = new System.Drawing.Size(76, 13);
+            this.downloadedTotalLbl.TabIndex = 8;
+            this.downloadedTotalLbl.Text = "<click refresh>";
+            // 
             // MainUi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(651, 336);
+            this.ClientSize = new System.Drawing.Size(557, 328);
             this.Controls.Add(this.downloadStrip);
             this.Controls.Add(this.fileStrip);
             this.Controls.Add(this.tabControl1);
@@ -681,10 +689,11 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ToolStripButton pauseBtn;
+        private System.Windows.Forms.Button refreshBtn;
+        private System.Windows.Forms.Label downloadsInQueueLbl;
+        private System.Windows.Forms.Label editsInQueueLbl;
+        private System.Windows.Forms.Label downloadedTotalLbl;
     }
 }
