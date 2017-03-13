@@ -227,15 +227,15 @@
 
             // Save changes
             using (var sw = new StringWriter())
-
-            using (var xtw = new XmlTextWriter(sw) { Namespaces = false })
             {
-                doc.Save(xtw);
-                xtw.Flush();
+                using (var xtw = new XmlTextWriter(sw) { Namespaces = false })
+                {
+                    doc.Save(xtw);
+                    xtw.Flush();
+                }
+
+                file.ContentText = sw.ToString();
             }
-
-            file.ContentText = sw.ToString();
-
 
             Statics.Logger.Debug("HtmlEditor - Finished Parse of " + file.OfflinePath);
         }
