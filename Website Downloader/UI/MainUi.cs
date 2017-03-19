@@ -4,14 +4,14 @@
     using System.IO;
     using System.Windows.Forms;
 
-    public partial class MainUi : Form
+    internal partial class MainUi : Form
     {
         private Modules.Bridge bridge = new Modules.Bridge();
         private string projectFilePath = string.Empty;
 
         public MainUi()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         /// <summary>
@@ -24,69 +24,13 @@
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainUi());
         }
-
-        private void openBtn_Click(object sender, EventArgs e)
-        {
-            if (openFileDlg.ShowDialog() == DialogResult.OK)
-            {
-                // TODO check if stuff is running before loading state
-                bridge.LoadState(openFileDlg.FileName);
-            }
-        }
-
-        private void saveBtn_Click(object sender, EventArgs e)
-        {
-            // TODO check if stuff is runnign
-            File.WriteAllText(projectFilePath, bridge.SaveState());
-        }
-
-        private void saveAsBtn_Click(object sender, EventArgs e)
-        {
-            // TODO check if stuff is running
-            if (saveFileDlg.ShowDialog() == DialogResult.OK)
-            {
-                projectFilePath = saveFileDlg.FileName;
-                File.WriteAllText(projectFilePath, bridge.SaveState());
-            }
-        }
-
-        private void aboutBtn_Click(object sender, EventArgs e)
-        {
-            var about = new AboutBox();
-            about.ShowDialog();
-            about.Dispose();
-        }
-
-        private void startBtn_Click(object sender, EventArgs e)
-        {
-            if (bridge.Paused || !bridge.Running)
-            {
-                ApplySettings();
-
-                if (!bridge.Running)
-                {
-                    this.SetButtonsStart();
-                    bridge.Start();
-                }
-                else if (bridge.Paused)
-                {
-                    this.SetButtonsResume();
-                    bridge.Resume();
-                }
-            }
-            else
-            {
-                Statics.Logger.Error("MainUi - Start button was active although it shouldnt have been - FIXME");
-                throw new InvalidOperationException("Should not have reached this state");
-            }
-        }
-
+        
         // reads settings from ui and stores them in Statics.*
         private void ApplySettings()
         {
-            Statics.StartUri = form_startUriText.Text;
+            Statics.StartUri = this.startUriField.Text;
 
-            Statics.OfflineBaseDir = form_downloadBaseDir.Text;
+            Statics.OfflineBaseDir = this.offlineLocationField.Text;
             if (!Statics.OfflineBaseDir.EndsWith("/") || !Statics.OfflineBaseDir.EndsWith("\\"))
             {
                 Statics.OfflineBaseDir += "/";
@@ -96,14 +40,14 @@
 
             Statics.Logger.Info("Starting download to " + Statics.OfflineBaseDir);
 
-            Statics.DownloadDepth = (int)form_downloadDepthNum.Value;
+            Statics.DownloadDepth = (int)this.downloadDepthNum.Value;
 
             // Checkboxes
-            for (int i = 0; i < form_downloadTypesChkList.Items.Count; i++)
+            for (int i = 0; i < this.downloadTypesChkList.Items.Count; i++)
             {
-                string name = (string)form_downloadTypesChkList.Items[i];
+                string name = (string)this.downloadTypesChkList.Items[i];
                 string prefix = name.Split(':')[0];
-                bool value = form_downloadTypesChkList.GetItemChecked(i);
+                bool value = this.downloadTypesChkList.GetItemChecked(i);
 
                 Statics.Logger.Info("MainUi - Download " + prefix + "=" + value);
 
@@ -129,46 +73,23 @@
                 }
             }
 
-            Statics.ParallelDownloads = (int)form_parallelDownloadsNum.Value;
-            Statics.ParallelEdits = (int)form_parallelEditsNum.Value;
+            Statics.ParallelDownloads = (int)this.parallelDownloadsNum.Value;
+            Statics.ParallelEdits = (int)this.parallelEditsNum.Value;
         }
-
-        private void pauseBtn_Click(object sender, EventArgs e)
-        {
-            this.SetButtonsPause();
-            bridge.Pause();
-        }
-
-        private void stopBtn_Click(object sender, EventArgs e)
-        {
-            bridge.Stop();
-            bridge.WaitForShutdown();
-            this.SetButtonsStop();
-        }
-
-        private void openBrowserBtn_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start(Modules.Storage.GetLocalPath(Statics.StartUri));
-        }
-
-        private void openExplorerBtn_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start(Statics.OfflineBaseDir);
-        }
-
+        
         private void MainUi_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (bridge != null && bridge.Running)
+            if (this.bridge != null && this.bridge.Running)
             {
-                bridge.Stop();
+                this.bridge.Stop();
             }
         }
 
         private void MainUi_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (bridge != null && bridge.Running)
+            if (this.bridge != null && this.bridge.Running)
             {
-                bridge.WaitForShutdown();
+                this.bridge.WaitForShutdown();
             }
 
             Application.Exit();
@@ -176,40 +97,36 @@
 
         private void SetButtonsStart()
         {
-            startBtn.Enabled = openBtn.Enabled = false;
-            pauseBtn.Enabled = stopBtn.Enabled = openBrowserBtn.Enabled = openExplorerBtn.Enabled = true;
+            this.startBtn.Enabled = this.openBtn.Enabled = false;
+            this.pauseBtn.Enabled = this.stopBtn.Enabled = this.openBrowserBtn.Enabled = this.openExplorerBtn.Enabled = true;
         }
 
         private void SetButtonsStop()
         {
-            startBtn.Enabled = openBtn.Enabled = true;
-            pauseBtn.Enabled = stopBtn.Enabled = false;
+            this.startBtn.Enabled = this.openBtn.Enabled = true;
+            this.pauseBtn.Enabled = this.stopBtn.Enabled = false;
         }
 
         private void SetButtonsPause()
         {
-            pauseBtn.Enabled = false;
-            startBtn.Enabled = true;
+            this.pauseBtn.Enabled = false;
+            this.startBtn.Enabled = true;
         }
 
         private void SetButtonsResume()
         {
-            pauseBtn.Enabled = true;
-            startBtn.Enabled = false;
+            this.pauseBtn.Enabled = true;
+            this.startBtn.Enabled = false;
         }
 
-        private void refreshBtn_Click(object sender, EventArgs e)
+        private void settingsPage_Click(object sender, EventArgs e)
         {
-            if (bridge == null)
-            {
-                downloadsInQueueLbl.Text = editsInQueueLbl.Text = downloadedTotalLbl.Text = "<not running>";
-            }
-            else
-            {
-                downloadsInQueueLbl.Text = bridge.DownloadsInQueue + " files";
-                editsInQueueLbl.Text = bridge.EditsInQueue + " files";
-                downloadedTotalLbl.Text = bridge.DownloadedFilesCount + " files";
-            }
+
+        }
+
+        private void MainUi_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

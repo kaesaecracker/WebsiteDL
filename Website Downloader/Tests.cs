@@ -10,7 +10,7 @@
     [TestFixture]
     public static class Tests
     {
-        private const bool DELTESTFILES = false;
+        private const bool DELTESTFILES = true;
 
         private static string testBasePath = Statics.AppData + "Test/";
         private static string downloadTestFile = testBasePath + "download.html";

@@ -193,8 +193,7 @@
             {
                 doc.Load(xtr);
             }
-
-
+            
             // TODO max depth
             // IMPROVE convert relative links to  absolute ones - should be fine for now though
 
