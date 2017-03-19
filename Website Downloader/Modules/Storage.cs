@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
-    using System.IO;
 
     internal class Storage : ModuleTemplate
     {
@@ -52,7 +51,7 @@
 
         internal override void LoopAction()
         {
-            // IMPLEMENT Storage LoopAction
+            // IMPROVE Storage adding etc via LoopAction
         }
 
         // returns yes if online uri is contained in one of the files

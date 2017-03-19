@@ -71,7 +71,7 @@
             }
             else
             {
-                throw new InvalidOperationException("Not running"); // TODO stop erroring when crashing
+                throw new InvalidOperationException("Not running");
             }
         }
 

@@ -5,11 +5,8 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
-    using System.Text;
     using System.Text.RegularExpressions;
-    using System.Threading;
     using System.Threading.Tasks;
-    using System.Windows.Forms;
     using System.Xml;
 
     internal class HtmlEditor : ModuleTemplate
@@ -194,9 +191,6 @@
                 doc.Load(xtr);
             }
             
-            // TODO max depth
-            // IMPROVE convert relative links to  absolute ones - should be fine for now though
-
             // Add direct links
             this.ChangeUris(doc, file, "a", "href");
 

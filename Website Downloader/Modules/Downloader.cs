@@ -4,9 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Net;
-    using System.Threading;
     using System.Threading.Tasks;
-    using System.Windows.Forms;
 
     internal class Downloader : ModuleTemplate
     {
