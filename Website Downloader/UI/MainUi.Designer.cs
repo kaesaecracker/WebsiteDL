@@ -43,7 +43,6 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.form = new System.Windows.Forms.TableLayoutPanel();
             this.form_startUriLbl = new System.Windows.Forms.Label();
-            this.form_startUriText = new System.Windows.Forms.TextBox();
             this.form_downloadDepthLbl = new System.Windows.Forms.Label();
             this.form_parallelEditsLbl = new System.Windows.Forms.Label();
             this.form_downloadDepthNum = new System.Windows.Forms.NumericUpDown();
@@ -56,11 +55,16 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.form_downloadBaseDir = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.form_startUriText = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.refreshBtn = new System.Windows.Forms.Button();
+            this.downloadsInQueueLbl = new System.Windows.Forms.Label();
+            this.editsInQueueLbl = new System.Windows.Forms.Label();
+            this.downloadedTotalLbl = new System.Windows.Forms.Label();
             this.fileStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.downloadStrip = new System.Windows.Forms.ToolStrip();
@@ -72,10 +76,6 @@
             this.openExplorerBtn = new System.Windows.Forms.ToolStripButton();
             this.openFileDlg = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDlg = new System.Windows.Forms.SaveFileDialog();
-            this.refreshBtn = new System.Windows.Forms.Button();
-            this.downloadsInQueueLbl = new System.Windows.Forms.Label();
-            this.editsInQueueLbl = new System.Windows.Forms.Label();
-            this.downloadedTotalLbl = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.form.SuspendLayout();
@@ -245,15 +245,6 @@
             this.form_startUriLbl.TabIndex = 0;
             this.form_startUriLbl.Text = "Start-URI";
             // 
-            // form_startUriText
-            // 
-            this.form_startUriText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.form_startUriText.Location = new System.Drawing.Point(153, 3);
-            this.form_startUriText.Name = "form_startUriText";
-            this.form_startUriText.Size = new System.Drawing.Size(385, 20);
-            this.form_startUriText.TabIndex = 1;
-            this.form_startUriText.Text = "https://wikipedia.org/";
-            // 
             // form_downloadDepthLbl
             // 
             this.form_downloadDepthLbl.AutoSize = true;
@@ -404,6 +395,15 @@
             this.button1.TabIndex = 1;
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // form_startUriText
+            // 
+            this.form_startUriText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.form_startUriText.Location = new System.Drawing.Point(153, 3);
+            this.form_startUriText.Name = "form_startUriText";
+            this.form_startUriText.Size = new System.Drawing.Size(385, 20);
+            this.form_startUriText.TabIndex = 1;
+            this.form_startUriText.Text = "https://wikipedia.org/";
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.tableLayoutPanel2);
@@ -467,6 +467,47 @@
             this.label6.Size = new System.Drawing.Size(55, 13);
             this.label6.TabIndex = 4;
             this.label6.Text = "Files Total";
+            // 
+            // refreshBtn
+            // 
+            this.refreshBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.SetColumnSpan(this.refreshBtn, 2);
+            this.refreshBtn.Location = new System.Drawing.Point(3, 3);
+            this.refreshBtn.Name = "refreshBtn";
+            this.refreshBtn.Size = new System.Drawing.Size(529, 29);
+            this.refreshBtn.TabIndex = 5;
+            this.refreshBtn.Text = "Refresh";
+            this.refreshBtn.UseVisualStyleBackColor = true;
+            this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
+            // 
+            // downloadsInQueueLbl
+            // 
+            this.downloadsInQueueLbl.AutoSize = true;
+            this.downloadsInQueueLbl.Location = new System.Drawing.Point(148, 35);
+            this.downloadsInQueueLbl.Name = "downloadsInQueueLbl";
+            this.downloadsInQueueLbl.Size = new System.Drawing.Size(76, 13);
+            this.downloadsInQueueLbl.TabIndex = 6;
+            this.downloadsInQueueLbl.Text = "<click refresh>";
+            // 
+            // editsInQueueLbl
+            // 
+            this.editsInQueueLbl.AutoSize = true;
+            this.editsInQueueLbl.Location = new System.Drawing.Point(148, 55);
+            this.editsInQueueLbl.Name = "editsInQueueLbl";
+            this.editsInQueueLbl.Size = new System.Drawing.Size(76, 13);
+            this.editsInQueueLbl.TabIndex = 7;
+            this.editsInQueueLbl.Text = "<click refresh>";
+            // 
+            // downloadedTotalLbl
+            // 
+            this.downloadedTotalLbl.AutoSize = true;
+            this.downloadedTotalLbl.Location = new System.Drawing.Point(148, 75);
+            this.downloadedTotalLbl.Name = "downloadedTotalLbl";
+            this.downloadedTotalLbl.Size = new System.Drawing.Size(76, 13);
+            this.downloadedTotalLbl.TabIndex = 8;
+            this.downloadedTotalLbl.Text = "<click refresh>";
             // 
             // fileStrip
             // 
@@ -571,47 +612,6 @@
             this.openFileDlg.FileName = "openFileDialog1";
             this.openFileDlg.Filter = "WebsiteDL Projects|*.wdlp,*.xml";
             this.openFileDlg.SupportMultiDottedExtensions = true;
-            // 
-            // refreshBtn
-            // 
-            this.refreshBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel2.SetColumnSpan(this.refreshBtn, 2);
-            this.refreshBtn.Location = new System.Drawing.Point(3, 3);
-            this.refreshBtn.Name = "refreshBtn";
-            this.refreshBtn.Size = new System.Drawing.Size(529, 29);
-            this.refreshBtn.TabIndex = 5;
-            this.refreshBtn.Text = "Refresh";
-            this.refreshBtn.UseVisualStyleBackColor = true;
-            this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
-            // 
-            // downloadsInQueueLbl
-            // 
-            this.downloadsInQueueLbl.AutoSize = true;
-            this.downloadsInQueueLbl.Location = new System.Drawing.Point(148, 35);
-            this.downloadsInQueueLbl.Name = "downloadsInQueueLbl";
-            this.downloadsInQueueLbl.Size = new System.Drawing.Size(76, 13);
-            this.downloadsInQueueLbl.TabIndex = 6;
-            this.downloadsInQueueLbl.Text = "<click refresh>";
-            // 
-            // editsInQueueLbl
-            // 
-            this.editsInQueueLbl.AutoSize = true;
-            this.editsInQueueLbl.Location = new System.Drawing.Point(148, 55);
-            this.editsInQueueLbl.Name = "editsInQueueLbl";
-            this.editsInQueueLbl.Size = new System.Drawing.Size(76, 13);
-            this.editsInQueueLbl.TabIndex = 7;
-            this.editsInQueueLbl.Text = "<click refresh>";
-            // 
-            // downloadedTotalLbl
-            // 
-            this.downloadedTotalLbl.AutoSize = true;
-            this.downloadedTotalLbl.Location = new System.Drawing.Point(148, 75);
-            this.downloadedTotalLbl.Name = "downloadedTotalLbl";
-            this.downloadedTotalLbl.Size = new System.Drawing.Size(76, 13);
-            this.downloadedTotalLbl.TabIndex = 8;
-            this.downloadedTotalLbl.Text = "<click refresh>";
             // 
             // MainUi
             // 
