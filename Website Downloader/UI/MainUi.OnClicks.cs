@@ -8,15 +8,16 @@
     {
         private void OpenBtn_Click(object sender, EventArgs e)
         {
-            var dlg = new OpenFileDialog()
+            using (var dlg = new OpenFileDialog()
             {
                 Filter = "WebsiteDL Projects | *.wdlp,*.xml"
-            };
-
-            if (dlg.ShowDialog() == DialogResult.OK)
+            })
             {
-                // TODO check if stuff is running before loading state
-                this.bridge.LoadState(dlg.FileName);
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    // TODO check if stuff is running before loading state
+                    this.bridge.LoadState(dlg.FileName);
+                }
             }
         }
 
@@ -106,15 +107,16 @@
 
         private void OfflineLocationBtn_Click(object sender, EventArgs e)
         {
-            var dlg = new FolderBrowserDialog()
+            using (var dlg = new FolderBrowserDialog()
             {
                 Description = "Choose the offline location",
                 ShowNewFolderButton = true
-            };
-
-            if (dlg.ShowDialog() == DialogResult.OK)
+            })
             {
-                this.offlineLocationField.Text = dlg.SelectedPath;
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    this.offlineLocationField.Text = dlg.SelectedPath;
+                }
             }
         }
     }
