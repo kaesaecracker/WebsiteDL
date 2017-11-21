@@ -1,4 +1,4 @@
-﻿namespace WebsiteDownloader.Modules
+﻿namespace WebsiteDL.Modules
 {
     using System;
     using System.IO;

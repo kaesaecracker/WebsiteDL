@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebsiteDownloader.Properties {
+namespace WebsiteDL.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -20,6 +20,169 @@ namespace WebsiteDownloader.Properties {
         public static Settings Default {
             get {
                 return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://wikipedia.org/")]
+        public string StartUrl {
+            get {
+                return ((string)(this["StartUrl"]));
+            }
+            set {
+                this["StartUrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\WebsiteDL\\")]
+        public string OfflineLocation {
+            get {
+                return ((string)(this["OfflineLocation"]));
+            }
+            set {
+                this["OfflineLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<not yet implemented>")]
+        public string List {
+            get {
+                return ((string)(this["List"]));
+            }
+            set {
+                this["List"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Pictures {
+            get {
+                return ((bool)(this["Pictures"]));
+            }
+            set {
+                this["Pictures"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Scripts {
+            get {
+                return ((bool)(this["Scripts"]));
+            }
+            set {
+                this["Scripts"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Objects {
+            get {
+                return ((bool)(this["Objects"]));
+            }
+            set {
+                this["Objects"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Stylesheets {
+            get {
+                return ((bool)(this["Stylesheets"]));
+            }
+            set {
+                this["Stylesheets"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int DownloadDepth {
+            get {
+                return ((int)(this["DownloadDepth"]));
+            }
+            set {
+                this["DownloadDepth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int ConcurrentDownloads {
+            get {
+                return ((int)(this["ConcurrentDownloads"]));
+            }
+            set {
+                this["ConcurrentDownloads"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int ConcurrentEdits {
+            get {
+                return ((int)(this["ConcurrentEdits"]));
+            }
+            set {
+                this["ConcurrentEdits"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>html</string>
+  <string>aspx</string>
+  <string>htm</string>
+  <string>php</string>
+  <string>jsp</string>
+</ArrayOfString>")]
+        public string[] HtmlExtensions {
+            get {
+                return ((string[])(this["HtmlExtensions"]));
+            }
+            set {
+                this["HtmlExtensions"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Blacklist {
+            get {
+                return ((bool)(this["Blacklist"]));
+            }
+            set {
+                this["Blacklist"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Whitelist {
+            get {
+                return ((bool)(this["Whitelist"]));
+            }
+            set {
+                this["Whitelist"] = value;
             }
         }
     }

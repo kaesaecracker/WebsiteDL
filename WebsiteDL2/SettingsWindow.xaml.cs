@@ -1,66 +1,37 @@
-﻿namespace WebsiteDownloader
+﻿namespace WebsiteDL
 {
     using System.IO;
     using System.Windows;
+    using System.Windows.Forms;
+    using WinForms = System.Windows.Forms;
+    using Unclassified.TxLib;
 
     public partial class SettingsWindow : Window
     {
         public  SettingsWindow()
         {
+            Tx.LoadFromXmlFile("Dictionary.txd");
             InitializeComponent();
         }
 
-        // reads settings from ui and stores them in Statics.*
-        private void ApplySettings()
+        private void SelectOfflineFolderClick(object sender, RoutedEventArgs e)
         {
-            Statics.StartUri = this.startUrlBox.Text;
-
-            Statics.OfflineBaseDir = this.offlineLocationBox.Text;
-            if (!Statics.OfflineBaseDir.EndsWith("/", System.StringComparison.Ordinal) 
-                || !Statics.OfflineBaseDir.EndsWith("\\", System.StringComparison.Ordinal))
+            using (var dlg = new WinForms.FolderBrowserDialog()
             {
-                Statics.OfflineBaseDir += "/";
-            }
-
-            Directory.CreateDirectory(Statics.OfflineBaseDir);
-
-            Statics.Logger.Info("Starting download to " + Statics.OfflineBaseDir);
-
-            Statics.DownloadDepth = (int)this.downloadDepthNum.Value;
-
-            // Checkboxes
-            for (int i = 0; i < this.downloadTypesChkList.Items.Count; i++)
+                Description = "Choose the offline location",
+                ShowNewFolderButton = true
+            })
             {
-                string name = (string)this.downloadTypesChkList.Items[i];
-                string prefix = name.Split(':')[0];
-                bool value = this.downloadTypesChkList.GetItemChecked(i);
-
-                Statics.Logger.Info("MainUi - Download " + prefix + "=" + value);
-
-                switch (prefix)
+                if (dlg.ShowDialog() == WinForms.DialogResult.OK)
                 {
-                    case "img":
-                        Statics.DownloadImages = value;
-                        break;
-                    case "js":
-                        Statics.DownloadScripts = value;
-                        break;
-                    case "css":
-                        Statics.DownloadStyles = value;
-                        break;
-                    case "obj":
-                        Statics.DownloadObjects = value;
-                        break;
-
-                    default:
-                        Statics.Logger.Error("MainUi - Unknown checkbox list item: " + prefix);
-                        MessageBox.Show("There seems to be a problem with your checkbox list");
-                        break;
+                    this.offlineLocationBox.Text = dlg.SelectedPath;
                 }
             }
+        }
 
-            Statics.ParallelDownloads = (int)this.parallelDownloadsNum.Value;
-            Statics.ParallelEdits = (int)this.parallelEditsNum.Value;
+        private void DownloadClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

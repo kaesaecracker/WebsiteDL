@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace WebsiteDownloader
+namespace WebsiteDL
 {
     /// <summary>
     /// Interaction logic for DownloadWindow.xaml

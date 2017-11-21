@@ -1,14 +1,16 @@
-﻿<Window x:Class="WebsiteDownloader.SettingsWindow"
+﻿<Window x:Class="WebsiteDL.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:Tx="http://unclassified.software/source/txtranslation"
+        xmlns:p="clr-namespace:WebsiteDL.Properties"
         mc:Ignorable="d"
-        Title="WebsiteDL"
+        Title="{Tx:T Key=SettingsWindow:Title}"
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize">
-    <Grid Name="settingsPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid Name="settingsPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,5,5,5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*" />
@@ -24,56 +26,64 @@
         </Grid.RowDefinitions>
 
         <!-- Start-URL -->
-        <Label Content="Start-URL" Grid.Row="0" Grid.Column="0"/>
+        <Label Content="{Tx:T Key=SettingsWindow:StartUrl}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <TextBox Name="startUrlBox" Grid.Row="0" Grid.Column="1" 
-                     Text="" 
+                     Text="{ Binding Source={x:Static p:Settings.Default}, Path=StartUrl}" 
                      MinWidth="250"
                      AcceptsReturn="False" 
-                     AcceptsTab="False"/>
+                     AcceptsTab="False" Margin="0,0,0,5"/>
 
         <!-- Offline Path -->
-        <Label Content="Offline Location" Grid.Row="1" Grid.Column="0" />
-        <Grid  Grid.Row="1" Grid.Column="1" >
+        <Label Content="{Tx:T Key=SettingsWindow:OfflinePath}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        <Grid  Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="20"/>
             </Grid.ColumnDefinitions>
 
-            <TextBox Name="offlineLocationBox" Grid.Column="0" />
-            <Button Content="..." Grid.Column="1"/>
+            <TextBox Name="offlineLocationBox" Grid.Column="0" IsReadOnly="True" 
+                     Text="{Binding Source={x:Static p:Settings.Default}, Path=OfflineLocation}"/>
+            <Button Content="..." Grid.Column="1" Height="21" VerticalAlignment="Top" Click="SelectOfflineFolderClick"/>
         </Grid>
 
         <!-- Black/Whitelist-->
-        <Label Content="List" Grid.Row="2" Grid.Column="0"/>
-        <StackPanel Grid.Row="2" Grid.Column="1">
-            <StackPanel Orientation="Horizontal" >
-                <RadioButton Name="whitelistRadio" Content="Whitelist" GroupName="Mode" VerticalAlignment="Center" />
-                <RadioButton Name="blacklistRadio" Content="Blacklist" GroupName="Mode" VerticalAlignment="Center" />
+        <Label Content="{Tx:T Key=SettingsWindow:List}" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <StackPanel Grid.Row="2" Grid.Column="1" Margin="0,0,0,5">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,2" >
+                <RadioButton Content="{Tx:T Key=SettingsWindow:Whitelist}" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=Whitelist}" 
+                             Name="whitelistRadio" GroupName="Mode" VerticalAlignment="Center" Margin="0,0,10,0" />
+                <RadioButton Content="{Tx:T Key=SettingsWindow:Blacklist}" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=Blacklist}"
+                             Name="blacklistRadio" GroupName="Mode" VerticalAlignment="Center" />
             </StackPanel>
             <ScrollViewer>
-                <xctk:WatermarkTextBox Name="listBox" Watermark="example.com, test.org"  
+                <xctk:WatermarkTextBox Name="listBox" 
+                    Text="{Binding Source={x:Static p:Settings.Default}, Path=List}" Watermark="example.com, test.org"  
                     MinLines="5"
                     TextWrapping="Wrap" AcceptsReturn="True"/>
             </ScrollViewer>
         </StackPanel>
 
         <!-- Download-Types -->
-        <Label Content="Linked files" Grid.Row="3" Grid.Column="0"/>
-        <StackPanel Grid.Row="3" Grid.Column="1">
-            <CheckBox Name="pictureBox" Content="Pictures"  IsChecked="True" Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch"/>
-            <CheckBox Name="scriptBox" Content="Scripts" IsChecked="True" Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch"/>
-            <CheckBox Name="cssBox" Content="Stylesheets" IsChecked="True" Grid.Row="4" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch"/>
-            <CheckBox Name="objectBox" Content="Objects" IsChecked="True" Grid.Row="5" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch"/>
+        <Label Content="{Tx:T Key=SettingsWindow:LinkedFiles}" Grid.Row="3" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <StackPanel Grid.Row="3" Grid.Column="1" Margin="0,0,0,5">
+            <CheckBox Name="pictureBox" Content="{Tx:T Key=SettingsWindow:Pictures}"  IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=Pictures}" 
+                      Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" Padding="4,-1,0,1"/>
+            <CheckBox Name="scriptBox" Content="{Tx:T Key=SettingsWindow:Scripts}" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=Scripts}" 
+                      Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" Padding="4,-1,0,1"/>
+            <CheckBox Name="cssBox" Content="{Tx:T Key=SettingsWindow:Stylesheets}" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=Stylesheets}" 
+                      Grid.Row="4" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" Padding="4,-1,0,1"/>
+            <CheckBox Name="objectBox" Content="{Tx:T Key=SettingsWindow:Objects}" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=Objects}" 
+                      Grid.Row="5" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" Padding="4,-1,0,1"/>
         </StackPanel>
 
         <!-- Depth -->
-        <Label Content="Download Depth" Grid.Row="4" Grid.Column="0"/>
-        <xctk:IntegerUpDown Grid.Row="4" Grid.Column="1"
-            Minimum="1" DefaultValue="5"
-            AllowSpin="True" ClipValueToMinMax="True"/>
+        <Label Content="{Tx:T Key=SettingsWindow:DownloadDepth}" Grid.Row="4" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <xctk:IntegerUpDown Name="depthUpDown" Grid.Row="4" Grid.Column="1"
+            Minimum="1" DefaultValue="5" Value="{Binding Source={x:Static p:Settings.Default}, Path=DownloadDepth}"
+            AllowSpin="True" ClipValueToMinMax="True" Margin="0,0,0,5"/>
 
         <!-- Concurrency -->
-        <Label Content="Threads" Grid.Row="5" Grid.Column="0"/>
+        <Label Content="{Tx:T Key=SettingsWindow:Threads}" Grid.Row="5" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <Grid Grid.Row="5" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
@@ -83,16 +93,20 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            
-            <Label Content="Downloads" Grid.Row="0" Grid.Column="0"/>
+
+            <Label Content="{Tx:T Key=SettingsWindow:Downloads}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top"/>
             <xctk:IntegerUpDown Name="downloadsUpDown" Grid.Row="0" Grid.Column="1"
-                DefaultValue="5" Minimum="1" />
-            <Label Content="Edits" Grid.Row="1" Grid.Column="0"/>
+                DefaultValue="5" Minimum="1" Value="{Binding Source={x:Static p:Settings.Default}, Path=ConcurrentDownloads}"
+                Margin="0,0,0,3" />
+            <Label Content="{Tx:T Key=SettingsWindow:Edits}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top"/>
             <xctk:IntegerUpDown Name="editsUpDown" Grid.Row="1" Grid.Column="1"
-                DefaultValue="5" Minimum="1" />
+                DefaultValue="5" Minimum="1" Value="{Binding Source={x:Static p:Settings.Default}, Path=ConcurrentEdits}"
+                Margin="0,0,0,3" />
         </Grid>
 
         <!-- Download-Button -->
-        <Button Name="downloadBtn" Content="Download" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" />
+        <Button Name="downloadBtn" Content="{Tx:T Key=SettingsWindow:Download}" 
+                Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
+                Click="DownloadClick"/>
     </Grid>
 </Window>

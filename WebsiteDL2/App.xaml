@@ -1,15 +1,7 @@
-﻿<Application x:Class="WebsiteDL2.App"
+﻿<Application x:Class="WebsiteDL.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:WebsiteDL2"
-             StartupUri="MainWindow.xaml">
-    <Application.Resources>
-
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Simple Styles.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-
-    </Application.Resources>
-</Application>
+             xmlns:local="clr-namespace:WebsiteDL"
+             StartupUri="SettingsWindow.xaml"
+             DispatcherUnhandledException="App_DispatcherUnhandledException" 
+             Exit="Application_Exit"/>

@@ -1,4 +1,4 @@
-﻿namespace WebsiteDownloader
+﻿namespace WebsiteDL
 {
     using System.IO;
     using System.Xml;
